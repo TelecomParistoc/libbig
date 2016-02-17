@@ -1,8 +1,8 @@
 #ifndef UMBRELLA_H
 #define UMBRELLA_H
 
-void inline initUmbrella();
-void inline deployUmbrella();
-void inline closeUmbrella();
+void initUmbrella();
+void deployUmbrella();
+void closeUmbrella();
 
 #endif
