@@ -1,4 +1,7 @@
 build/
-tests/robottest tests/AX12position tests/eatertest tests/umbrellatest
+tests/robottest
+tests/AX12position
+tests/eatertest
+tests/umbrellatest
 *.swp
 **/.DS_Store
