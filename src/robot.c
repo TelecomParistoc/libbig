@@ -80,5 +80,5 @@ int getMode() {
     return getButton(4);
 }
 int getStrategy() {
-    return getButton(6) + 1;
+    return 2 - getButton(6);
 }
