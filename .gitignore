@@ -1,3 +1,4 @@
 build/
-tests/fishingtest
+tests/robottest
 *.swp
+**/.DS_Store
