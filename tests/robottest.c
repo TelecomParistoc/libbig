@@ -19,9 +19,22 @@ int main () {
     onCollisionEnd(collisionEnd);
 
     onGameStart(gameStart);
-    
-    printf("Current config : %d\n", getTableConfig());
 
-    while(1);
+    while(1) {
+        // config switch
+        printf("Current config : %d\n", getTableConfig());
+        // buttons test
+        if(getTeam()==GREEN_TEAM)
+            printf("Team : green\n");
+        else
+            printf("Team : purple\n");
+        if(getMode()==MATCH_MODE)
+            printf("Mode : match\n");
+        else
+            printf("Mode : test\n");
+        printf("Strategy: %d\n", getStrategy());
+
+        waitFor(200);
+    }
     return 0;
 }

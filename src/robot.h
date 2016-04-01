@@ -21,8 +21,29 @@ void onCollisionDetect(void (*callback)(int));
  * the callback should be like void myCallback(int collisionSensor) {...}. The
  * argument collisionSensor is the sensor that stopped detecting an obstacle */
 void onCollisionEnd(void (*callback)(int));
+/* collision sensors as used in onCollisionDetect/onCollisionEnd : */
+#define REAR_LEFT_COLLISION 0
+#define REAR_RIGHT_COLLISION 1
+#define FRONT_LEFT_COLLISION 2
+#define FRONT_RIGHT_COLLISION 3
 
-/* returns the current table configuration, describing how the shells are placed */
+/* returns the selected team */
+int getTeam();
+/* teams defined as : */
+#define GREEN_TEAM 0
+#define PURPLE_TEAM 1
+
+/* returns the selected mode (test or match) */
+int getMode();
+/* mode defined as : */
+#define MATCH_MODE 0
+#define TEST_MODE 1
+
+/* returns the selected strategy (1 or 2) */
+int getStrategy();
+
+/* returns the current table configuration, describing how the shells are placed
+ * returned config is between 0 and 5, 0 being 'OFF' and 1->5 are configurations */
 int getTableConfig();
 
 #ifdef __cplusplus

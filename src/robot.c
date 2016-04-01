@@ -10,17 +10,22 @@
 static void (*gameStartCallback)(void) = NULL;
 static void (*collisionDetectCallback)(int) = NULL;
 static void (*collisionEndCallback)(int) = NULL;
-static int collisions[4] = {0, 0, 0};
+static int collisions[4] = {0, 0, 0, 0};
 
 static void collisionsCallback() {
     for(int i=0; i<4; i++) {
-        if(collisionDetectCallback != NULL && getCollisionDetector(i+3) && (!collisions[i])) {
-            collisionDetectCallback(i);
+        if(getCollisionDetector(i+1) && (!collisions[i])) {
+            if(collisionDetectCallback != NULL && i > 1)
+                collisionDetectCallback(i);
+            else if(collisionEndCallback != NULL)
+                collisionEndCallback(i);
+        } else if(!getCollisionDetector(i+1)) && collisions[i]) {
+            if(collisionEndCallback != NULL && i > 1)
+                collisionEndCallback(i);
+            else if(collisionDetectCallback != NULL)
+                collisionDetectCallback(i);
         }
-        if(collisionEndCallback != NULL && (!getCollisionDetector(i+3)) && collisions[i]) {
-            collisionEndCallback(i);
-        }
-        collisions[i]= getCollisionDetector(i+2);
+        collisions[i]= getCollisionDetector(i+1);
     }
 }
 static void sensorsCallback() {
@@ -64,5 +69,16 @@ void onCollisionEnd(void (*callback)(int)) {
 }
 
 int getTableConfig() {
-    return getButton(1) + getButton(2)*2 + getButton(3)*3;
+    return getButton(2) + getButton(3)*2 + getButton(1)*3;
+}
+
+// roof top buttons
+int getTeam() {
+    return getButton(5);
+}
+int getMode() {
+    return getButton(4);
+}
+int getStrategy() {
+    return getButton(6) + 1;
 }
