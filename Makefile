@@ -7,7 +7,7 @@ CFLAGS = -O2 -std=gnu99 -Wall -Werror -fpic
 LDFLAGS= -shared -lrobotdriver
 PREFIX = /usr/local
 VPATH = build/
-TESTS = tests/robottest
+TESTS = tests/robottest tests/AX12position
 
 vpath %.c src/
 vpath %.h src/
