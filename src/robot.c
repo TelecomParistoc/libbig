@@ -19,7 +19,7 @@ static void collisionsCallback() {
                 collisionDetectCallback(i);
             else if(collisionEndCallback != NULL)
                 collisionEndCallback(i);
-        } else if(!getCollisionDetector(i+1)) && collisions[i]) {
+        } else if((!getCollisionDetector(i+1)) && collisions[i]) {
             if(collisionEndCallback != NULL && i > 1)
                 collisionEndCallback(i);
             else if(collisionDetectCallback != NULL)
