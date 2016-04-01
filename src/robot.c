@@ -48,11 +48,11 @@ void initRobot() {
 	disableSensorCallback(5);
 	setSensorsCallback(sensorsCallback);
 
-	disableCollisionCallback(1);
-	disableCollisionCallback(2);
+	enableCollisionCallback(1);
+	enableCollisionCallback(2);
 	enableCollisionCallback(3);
 	enableCollisionCallback(4);
-	enableCollisionCallback(5);
+	disableCollisionCallback(5);
 	setCollisionsCallback(collisionsCallback);
 }
 
