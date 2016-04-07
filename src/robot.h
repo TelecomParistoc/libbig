@@ -30,14 +30,14 @@ void onCollisionEnd(void (*callback)(int));
 /* returns the selected team */
 int getTeam();
 /* teams defined as : */
-#define GREEN_TEAM 0
-#define PURPLE_TEAM 1
+#define GREEN_TEAM 1
+#define PURPLE_TEAM 0
 
 /* returns the selected mode (test or match) */
 int getMode();
 /* mode defined as : */
-#define MATCH_MODE 0
-#define TEST_MODE 1
+#define MATCH_MODE 1
+#define TEST_MODE 0
 
 /* returns the selected strategy (1 or 2) */
 int getStrategy();
