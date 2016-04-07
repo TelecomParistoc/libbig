@@ -15,8 +15,8 @@ int main() {
         return -1;
     }
 
-    // no speed, default torque, wheel mode
-    axSetTorqueSpeed(AX12_ID, -1, -1, WHEEL_MODE);
+    // no speed, no torque, wheel mode
+    axSetTorqueSpeed(AX12_ID, 0, 0, WHEEL_MODE);
     // first read to load position
     axGetPosition(AX12_ID);
 
