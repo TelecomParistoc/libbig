@@ -2,19 +2,19 @@
 #include <stdlib.h>
 #include "umbrella.h"
 
-#define AXUMBRELLA 0 //TODO Put good id
-#define UMBRELLASPEED 50
-#define UMBRELLAUP 812
-#define UMBRELLADOWN 564
+#define AXUMBRELLA 144
+#define UMBRELLASPEED 100
+#define UMBRELLAUP 829
+#define UMBRELLADOWN 593
 
-void inline initUmbrella(){
-	axSetTorqueSPEED(AXUMBRELLA, -1, UMBRELLASPEED, 0);
+void initUmbrella(){
+	axSetTorqueSpeed(AXUMBRELLA, -1, UMBRELLASPEED, 0);
 }
 
-void inline deployUmbrella(){
-	axMove(UMBRELLAID, UMBRELLAUP, NULL);
+void deployUmbrella(){
+	axMove(AXUMBRELLA, UMBRELLAUP, NULL);
 }
 
-void inline closeUmbrella(){
-	axMove(UMBRELLAID, UMBRELLADOWN, NULL);
+void closeUmbrella(){
+	axMove(AXUMBRELLA, UMBRELLADOWN, NULL);
 }

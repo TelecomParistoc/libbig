@@ -5,7 +5,8 @@
 #include <robotdriver/toolboxdriver.h>
 #include <stdlib.h>
 #include "robot.h"
-
+#include "umbrella.h"
+#include "eater.h"
 
 static void (*gameStartCallback)(void) = NULL;
 static void (*collisionDetectCallback)(int) = NULL;
@@ -55,6 +56,8 @@ void initRobot() {
 	enableCollisionCallback(4);
 	disableCollisionCallback(5);
 	setCollisionsCallback(collisionsCallback);
+	initUmbrella();
+	initBrush();
 }
 
 void onGameStart(void (*callback)(void)) {

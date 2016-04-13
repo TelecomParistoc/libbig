@@ -1,12 +1,12 @@
 #ifndef EATER_H
 #define EATER_H
 
-void inline initDoor();
-void inline openDoor();
-void inline closeDoor();
+void initBrush();
+void setBrush();
+void unsetBrush();
 
-void inline setCloseDoorCallback((*callback)(void));
-void inline setOpenDoorCallback((*callback)(void));
+void setCloseDoorCallback(void (*callback)(void));
+void setOpenDoorCallback(void (*callback)(void));
 
 void startEater();
 void stopEater();
