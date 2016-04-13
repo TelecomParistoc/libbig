@@ -40,7 +40,8 @@ void initRobot() {
 	setRobotDistance(0);
 	setRobotHeading(0);
 	axReset();
-
+    setRotationDirection(getTeam() == PURPLE_TEAM);
+    
 	enableSensorCallback(1);
 	disableSensorCallback(2);
 	disableSensorCallback(3);
