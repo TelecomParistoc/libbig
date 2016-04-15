@@ -62,46 +62,67 @@ void stopEater(){
 	axSetTorqueSpeed(AXLEFTBRUSH,  -1, 0, 1);
 	axSetTorqueSpeed(AXRIGHTBRUSH, -1, 0, 1);
 }
-
+/*
 static void eaterActionFinished(struct motionElement * a) {
 	if(a) {}
 	printf("finished eating\n");
 }
-
+*/
 // stop collecting cubes and move backward to the place where the action started
 static void stopEating() {
 	stopEater();
 	// move backward
-	queueSpeedChange(-0.1, NULL);
-	setTargetHeading(135, NULL);
-	queueStopAt(0, eaterActionFinished);
+	fastSpeedChange(0);
+	setBlockingCallback(NULL);
+	//queueSpeedChange(-0.1, NULL);
+	//setTargetHeading(135, NULL);
+	//queueStopAt(0, eaterActionFinished);
+}
+/*
+static void onCubeBlocking3() {
+        fastSpeedChange(0);
+	setBlockingCallback(NULL);
 }
 
-static void onCubeBlocking();
+static void onTurnEnd2() {
+	setBlockingCallback(onCubeBlocking3);
+        queueSpeedChange(0.05, NULL);
+}
+static void onBackwardEnd() {
+	turnOf(-12, onTurnEnd2);
+}
+static void onCubeBlocking2() {
+	clearMotionQueue();
+	queueSpeedChange(-0.1, NULL);
+	queueStopAt(-100, onBackwardEnd);
+}
 // try to move forward again
-static void onCubeRestart() {
-	static int angle = 15;
-	queueSpeedChange(0.05, NULL);
-	turnOf(angle, NULL);
-	angle = -angle;
-	setBlockingCallback(onCubeBlocking);
-	printf("resume moving\n");
+static void onTurnEnd() {
+	startEater();
+	setRobotDistance(0);
+	queueSpeedChange(0.02, NULL);
+	scheduleIn(1500, onCubeBlocking2);
+	printf("turn end\n");
 }
 // avoid forcing when hitting a cube
 static void onCubeBlocking() {
-	scheduleIn(700, onCubeRestart);
+	//turnOf(35, onTurnEnd);
 	setBlockingCallback(NULL);
-	fastSpeedChange(-0.05);
+	fastSpeedChange(0.01);
 }
 // then go and eat cubes !
 static void goForCubes() {
-	setBlockingCallback(onCubeBlocking);
-	queueSpeedChange(0.1, NULL);
-	// set up the timeout
-	scheduleIn(10000, stopEating);
 	startEater();
-}
+	setBlockingCallback(onCubeBlocking);
+	queueSpeedChange(0.2, NULL);
+	// set up the timeout
+	scheduleIn(20000, stopEating);
+}*/
 // start collecting cubes : first turn toward cubes
 void startEaterAction() {
-	setTargetHeading(135, goForCubes);
+	scheduleIn(20000, stopEating);
+	startEater();
+        //setBlockingCallback(onCubeBlocking);
+	setRobotDistance(0);
+        queueSpeedChange(0.01, NULL);
 }

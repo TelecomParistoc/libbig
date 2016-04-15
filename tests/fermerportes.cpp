@@ -38,7 +38,6 @@ void endWay()
 int main()
 {
     initRobot();
-    setRGB(255, 0, 0);
 
     ///TODO: mettre les callbacks appropriés
     //setJackCallback(&go);
@@ -98,7 +97,7 @@ int main()
             }
 
         curPos = PathFollower::getCurrentPos();
-        std::cout<<curPos.first<<" "<<curPos.second<<";"<<curDir.first<<" "<<curDir.second<<std::endl;
+        std::cout<<curPos.first<<" "<<curPos.second<<std::endl;
 
         waitFor(50);
     }
