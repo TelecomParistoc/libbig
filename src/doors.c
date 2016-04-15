@@ -3,7 +3,7 @@
 #include <robotdriver/headingcontroller.h>
 #include <robotdriver/motordriver.h>
 #include <pathfollower/pathfollower.h>
-#include <librobot/robot.h>
+#include "robot.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include "doors.h"

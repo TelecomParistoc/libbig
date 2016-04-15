@@ -23,7 +23,7 @@ int main () {
     onCollisionEnd(collisionEnd);
 
     onGameStart(gameStart);
-    onGameStop(gameStop),
+    onGameStop(gameStop);
 
     while(1) {
         // config switch

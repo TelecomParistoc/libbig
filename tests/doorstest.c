@@ -1,15 +1,18 @@
 #include <librobot/robot.h>
 #include <librobot/doors.h>
 #include <pathfollower/pathfollower.h>
+#include <robotdriver/toolboxdriver.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <robotdriver/motordriver.h>
 
 static void arrivedAtDoor() {
     startDoorsAction();
 }
 
 int main() {
-	initRobot();
+    initRobot();
+    setRobotHeading(90);
     setCurrentLocation(1162, 1386);
     ffollow("zone2doors", arrivedAtDoor);
 	while(!isDoorsActionFinished()) {
