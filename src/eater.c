@@ -4,6 +4,7 @@
 #include <robotdriver/motordriver.h>
 #include <robotdriver/toolboxdriver.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include "eater.h"
 
 // Ax-12 that controls the brushes
@@ -62,12 +63,13 @@ void stopEater(){
 	axSetTorqueSpeed(AXRIGHTBRUSH, -1, 0, 1);
 }
 
-static void eaterActionFinished(struct motionElement *) {
+static void eaterActionFinished(struct motionElement * a) {
+	if(a) {}
 	printf("finished eating\n");
 	exit(0);
 }
 // stop collecting cubes and move backward to the place where the action started
-static stopEating() {
+static void stopEating() {
 	stopEater();
 	// move backward
 	enableHeadingControl(1);
