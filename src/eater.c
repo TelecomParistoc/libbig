@@ -124,26 +124,31 @@ static void stopEating() {
 	setSideBlockingCallback(NULL);
 }
 
-static void stopAndEat();
+static void sideBlocked();
 static void moveAndEat() {
-	if(actionState >= 7)
+	if(actionState > 7)
 		return;
 	fastSpeedChange(0.01);
-	setSideBlockingCallback(stopAndEat);
+	setSideBlockingCallback(sideBlocked);
 }
+
 static void stopAndEat() {
-	if(actionState >= 7)
+	if(actionState > 7)
 		return;
-	fastSpeedChange(-0.01);
+	fastSpeedChange(-0.02);
 	setSideBlockingCallback(NULL);
 	scheduleIn(800, moveAndEat);
+}
+static void sideBlocked() {
+	scheduleIn(800, stopAndEat);
+	setSideBlockingCallback(NULL);
 }
 static void turnEnd4() {
 	setActiveDetectors(none);
 	queueSpeedChange(0.1, NULL);
-	queueSpeedChangeAt(60, 0.01, NULL);
+	queueSpeedChangeAt(65, 0.01, NULL);
 	setRobotDistance(0);
-	setSideBlockingCallback(stopAndEat);
+	setSideBlockingCallback(sideBlocked);
 	startEater();
 }
 static void backwardFinished(struct motionElement * a) {
@@ -191,7 +196,7 @@ static void turnEnd() {
 // start collecting cubes : first destroy cube stack
 void startEaterAction() {
 	actionState = 1;
-	scheduleIn(25000, stopEating);
+	scheduleIn(30000, stopEating);
 	setTargetHeading(150, turnEnd);
 	initBrush();
 	setActiveDetectors(rear);

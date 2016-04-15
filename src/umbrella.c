@@ -22,7 +22,7 @@ void closeUmbrella(){
 
 static void onEndOfTheGame() {
 	initUmbrella();
-	deployUÃmbrella);
+	deployUmbrella();
 	printf("umbrella deploying\n");
 }
 void startUmbrellaAction() {
