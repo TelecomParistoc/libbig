@@ -15,7 +15,7 @@
 #define BRUSHSPEED 500
 #define BRUSHON 812
 #define BRUSHOFF 280
-#define BRUSHMIDDLE 680
+#define BRUSHMIDDLE 720
 
 #define AXDOOR 141
 #define DOORSPEED 400
@@ -101,7 +101,7 @@ static void unloadCubes() {
 	enableHeadingControl(1);
 	startEater();
 	openDoor();
-	scheduleIn(5000, robotEmpty);
+	scheduleIn(8000, robotEmpty);
 }
 static void turnEnd5() {
 	setActiveDetectors(none);
@@ -175,8 +175,8 @@ static void turnBack() {
 	actionState = 3;
 	fastSpeedChange(0);
 	setMaxAcceleration(0.1);
-	setTargetHeading(105, turnEnd2);
-	setSideBlockingCallback(turnEnd2);
+	setTargetHeading(115, turnEnd2);
+	//setSideBlockingCallback(turnEnd2);
 }
 static void turnEnd() {
 	actionState = 2;
