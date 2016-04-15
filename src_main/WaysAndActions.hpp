@@ -20,4 +20,25 @@ void initWaysAndActions()
 
     PathFollower::setRadiusPositiveSpeed(180);
     PathFollower::setRadiusNegativeSpeed(120);
+
+    setLED(1,1);
+}
+
+bool start = false;
+
+void go()
+{start = true;}
+
+void allume()
+{
+    std::cout<<"Jack grabed"<<std::endl;
+    onGameStart(&go);
+    /**A completer pour chaque robot**/
+    onStopGame(&exitAndClean);
+}
+
+void exitAndClean()
+{
+    std::cout<<"Exiting"<<std::endl;
+    exit(0);
 }

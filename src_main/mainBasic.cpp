@@ -10,7 +10,6 @@
 #include "WaysAndActions.hpp"
 
 
-bool start = false;
 bool isMovingToAction = false;
 bool started = false;
 bool blocked = false;
@@ -18,9 +17,6 @@ bool pausePath = false;
 bool seeBlocked = false;
 
 int way = -1;
-
-void go()
-{start = true;}
 
 void checkCollisionAndReact(int)
 {seeBlocked = true;}
@@ -47,11 +43,10 @@ void endAction()
 int main()
 {
 	initRobot();
-	setRGB(255, 0, 0);
-
 	initWaysAndActions();
 
-	onGameStart(&go); //start = true;
+	onStopGame(&allume);
+
 	onCollisionDetect(&checkCollisionAndReact);
 
 	setMoveStartCallback(&PathFollower::updateAngleStartingMove);
