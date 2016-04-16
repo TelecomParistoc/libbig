@@ -1,6 +1,7 @@
 #include <robotdriver/motioncontroller.h>
 #include <robotdriver/speedcontroller.h>
 #include <robotdriver/headingcontroller.h>
+#include <robotdriver/toolboxdriver.h>
 #include <robotdriver/motordriver.h>
 #include <pathfollower/pathfollower.h>
 #include "robot.h"
@@ -18,13 +19,14 @@ static void actionFinished() {
         return;
     fastSpeedChange(0);
     setSideBlockingCallback(NULL);
-    setCurrentLocation(510, 1859);
-    setActiveDetectors(all);
+    setCurrentLocation(450, 1859);
+    //setActiveDetectors(all);
     actionState = 7;
 }
 static void closeDoor() {
     queueSpeedChange(-0.1, NULL);
     setSideBlockingCallback(actionFinished);
+    scheduleIn(1500, actionFinished);
 }
 static void turnToDoor(struct motionElement * a) {
     if(a) {}
@@ -32,12 +34,12 @@ static void turnToDoor(struct motionElement * a) {
     setActiveDetectors(none);
     setTargetHeading(270, closeDoor);
     setSideBlockingCallback(closeDoor);
-}
+}/*
 static void moveBackward() {
     actionState=5;
     setRobotDistance(0);
     queueSpeedChange(-0.2, NULL);
-    queueStopAt(-100, turnToDoor);
+    queueStopAt(-40, turnToDoor);
 }
 static void turnEnd() {
     if(actionState >= 4)
@@ -51,7 +53,7 @@ static void closeFirstDoor(struct motionElement * a) {
     if(a) {}
     setTargetHeading(154, turnEnd);
     setSideBlockingCallback(turnEnd);
-}
+}*/
 static void recalibrationEnd() {
     actionState = 2;
     enableHeadingControl(1);
@@ -61,14 +63,14 @@ static void recalibrationEnd() {
     setRobotHeading(180);
     setTargetHeading(180, NULL);
     queueSpeedChange(-0.3, NULL);
-    queueStopAt(-230, closeFirstDoor);
+    queueStopAt(-260, turnToDoor);
 }
 void resumeDoorsAction() {
     switch (actionState) {
         case 1:
             startDoorsAction();
             break;
-        case 2:
+       /* case 2:
 	    queueSpeedChange(-0.3, NULL);
    	    queueStopAt(-230, closeFirstDoor);
 	    break;
@@ -83,7 +85,7 @@ void resumeDoorsAction() {
             break;
         case 6:
             closeDoor(NULL);
-            break;
+            break;*/
     }
 }
 void pauseDoorsAction() {

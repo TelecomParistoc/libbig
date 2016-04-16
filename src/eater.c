@@ -139,7 +139,7 @@ static void stopAndEat() {
 		return;
 	fastSpeedChange(-0.1);
 	setSideBlockingCallback(NULL);
-	scheduleIn(900, moveAndEat);
+	scheduleIn(200, moveAndEat);
 	printf("back\n");
 }
 static void sideBlocked() {
@@ -153,7 +153,7 @@ static void turnEnd4() {
 	queueSpeedChange(0.1, NULL);
 	queueSpeedChangeAt(65, 0.01, NULL);
 	setRobotDistance(0);
-	scheduleIn(3000, sideBlocked);
+	scheduleIn(6000, sideBlocked);
 	startEater();
 }
 static void backwardFinished(struct motionElement * a) {
@@ -189,7 +189,7 @@ static void turnBack() {
 	actionState = 3;
 	fastSpeedChange(0);
 	setMaxAcceleration(0.1);
-	setTargetHeading(124, turnEnd2);
+	setTargetHeading(120, turnEnd2);
 	//setSideBlockingCallback(turnEnd2);
 }
 static void turnEnd() {

@@ -35,8 +35,8 @@ void setActiveDetectors(collisionConfig_t config);
 
 #define REAR_LEFT_COLLISION 0
 #define REAR_RIGHT_COLLISION 1
-#define FRONT_LEFT_COLLISION 2
-#define FRONT_RIGHT_COLLISION 3
+#define FRONT_LEFT_COLLISION 3
+#define FRONT_RIGHT_COLLISION 2
 
 /* returns the selected team */
 int getTeam();

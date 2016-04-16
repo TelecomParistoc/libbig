@@ -50,7 +50,7 @@ void initRobot() {
 	setRobotDistance(0);
 	setRobotHeading(0);
 	axReset();
-    setRotationDirection(getTeam() == PURPLE_TEAM);
+	setRotationDirection(getTeam() == PURPLE_TEAM);
 
 	enableSensorCallback(1);
 	disableSensorCallback(2);
@@ -68,7 +68,7 @@ void initRobot() {
 	initUmbrella();
 	initBrush();
 
-    lastJack = getSensor(1);
+	lastJack = getSensor(1);
 }
 
 void onGameStart(void (*callback)(void)) {
@@ -91,7 +91,7 @@ void setActiveDetectors(collisionConfig_t config) {
 }
 
 int isRobotFront() {
-    printf("check front (positive speed) %d %d %d %d\n",collisions[0],collisions[1],collisions[2],collisions[3]);
+    //printf("check front (positive speed) %d %d %d %d\n",collisions[0],collisions[1],collisions[2],collisions[3]);
     switch (collConfig) {
         case all:
         case front:
@@ -108,7 +108,7 @@ int isRobotFront() {
 }
 
 int isRobotBehind() {
-    printf("check behind (negative speed) %d %d %d %d\n",collisions[0],collisions[1],collisions[2],collisions[3]);
+    //printf("check behind (negative speed) %d %d %d %d\n",collisions[0],collisions[1],collisions[2],collisions[3]);
     switch (collConfig) {
         case all:
         case rear:

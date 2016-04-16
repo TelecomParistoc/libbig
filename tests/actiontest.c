@@ -60,45 +60,52 @@ static void checkCollisions() {
         }
     }
 }
-static void enableAllSensors() {
-    setActiveDetectors(all);
+void enableAllSensors() {
+	setActiveDetectors(all);
 }
+static void enableRearSensors() {
+	setActiveDetectors(rear);
+}
+
 int main() {
-    initRobot();
-    setCurrentLocation(129, 1255);
-    onGameStop(onStop);
-    onGameStart(onStart);
+    	initRobot();
+    	setCurrentLocation(129, 1255);
+    	onGameStop(onStop);
+    	onGameStart(onStart);
 
-    while(started != 1) {
-        waitFor(200);
-        setLED(1, 0);
-        waitFor(200);
-        setLED(1, 1);
-    }
-    while(started != 2)
-        waitFor(200);
-    setLED(2, 1);
+    	while(started != 1) {
+        	waitFor(200);
+        	setLED(1, 0);
+        	waitFor(200);
+        	setLED(1, 1);
+    	}
+    	while(started != 2)
+        	waitFor(200);
+    	setLED(2, 1);
 
-    if(getTeam() == GREEN_TEAM)
-        setActiveDetectors(right);
-    else
-        setActiveDetectors(left);
-    ffollow("start2cubes", arrivedNearCubes);
-    startUmbrellaAction();
-    while(!isEaterActionFinished()) {
-        waitFor(50);
-        checkCollisions();
-    }
-    printf("finished eater action, going to doors ...\n");
-    ffollow("zone2doors", arrivedAtDoors);
-    while(!isDoorsActionFinished()) {
-        waitFor(50);
-        checkCollisions();
-    }
-    printf("doors closed\n");
-    setActiveDetectors(front);
-    scheduleIn(4000, enableAllSensors);
-    ffollow("doors2zone", NULL);
+    	setActiveDetectors(all);
+    	scheduleIn(5000, enableRearSensors);
+    	ffollow("start2cubes", arrivedNearCubes);
+    	startUmbrellaAction();
+    	while(!isEaterActionFinished()) {
+        	waitFor(50);
+        	checkCollisions();
+    	}
+    	printf("finished eater action, going to doors ...\n");
+	if(getTeam() == GREEN_TEAM)
+        	setActiveDetectors(right);
+   	else
+        	setActiveDetectors(left);
+
+    	ffollow("zone2doors", arrivedAtDoors);
+	while(!isDoorsActionFinished()) {
+		waitFor(50);
+		checkCollisions();
+	}
+	printf("doors closed\n");
+	setActiveDetectors(none);
+	scheduleIn(4000, enableAllSensors);
+	ffollow("doors2zone", NULL);
 	while(1);
 	return 0;
 }
