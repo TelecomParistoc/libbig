@@ -6,6 +6,7 @@
 #include <robotdriver/toolboxdriver.h>
 #include <robotdriver/motioncontroller.h>
 #include <robotdriver/speedcontroller.h>
+#include <robotdriver/motordriver.h>
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -87,7 +88,10 @@ int main() {
     	waitFor(200);
     setLED(2, 1);
     setLED(1, 0);
-    /*
+    setRobotHeading(270);
+    setRobotDistance(0);
+    setCurrentLocation(450, 1859);
+/*
     setActiveDetectors(all);
     scheduleIn(5000, enableRearSensors);
     ffollow("start2cubes", arrivedNearCubes);
