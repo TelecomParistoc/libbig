@@ -82,7 +82,7 @@ static void onCubeBlocking();
 static void onCubeRestart() {
 	static int angle = 15;
 	queueSpeedChange(0.05, NULL);
-	turnOf(angle);
+	turnOf(angle, NULL);
 	angle = -angle;
 	setBlockingCallback(onCubeBlocking);
 	printf("resume moving\n");
