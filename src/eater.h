@@ -10,4 +10,7 @@ void setOpenDoorCallback(void (*callback)(void));
 
 void startEater();
 void stopEater();
+
+void startEaterAction();
+
 #endif
