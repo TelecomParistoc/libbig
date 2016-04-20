@@ -79,12 +79,14 @@ static void stopEating() {
 // try to move forward again
 static void onCubeRestart() {
 	queueSpeedChange(0.05, NULL);
+	setBlockingCallback(onCubeBlocking);
 	printf("resume moving\n");
 }
 // avoid forcing when hitting a cube
 static void onCubeBlocking() {
-	scheduleIn(400, onCubeRestart);
-	fastSpeedChange(0);
+	scheduleIn(700, onCubeRestart);
+	setBlockingCallback(NULL);
+	fastSpeedChange(-0.05);
 	enableHeadingControl(0);
 }
 // then go and eat cubes !
