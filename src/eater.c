@@ -66,35 +66,30 @@ void stopEater(){
 static void eaterActionFinished(struct motionElement * a) {
 	if(a) {}
 	printf("finished eating\n");
-	exit(0);
 }
 
-static void oscillateRobot();
-static void oscillateRobot2() {
-	turnOf(-10, oscillateRobot);
-}
-static void oscillateRobot() {
-	turnOf(10, oscillateRobot2);
-}
 // stop collecting cubes and move backward to the place where the action started
 static void stopEating() {
 	stopEater();
 	// move backward
-	queueSpeedChange(-0.2, NULL);
+	queueSpeedChange(-0.1, NULL);
+	setTargetHeading(135, NULL);
 	queueStopAt(0, eaterActionFinished);
 }
 
 static void onCubeBlocking();
 // try to move forward again
 static void onCubeRestart() {
+	static angle = 15;
 	queueSpeedChange(0.05, NULL);
+	turnOf(angle);
+	angle = -angle;
 	setBlockingCallback(onCubeBlocking);
 	printf("resume moving\n");
 }
 // avoid forcing when hitting a cube
 static void onCubeBlocking() {
-	scheduleIn(400, onCubeRestart);
-	scheduleIn(700, oscillateRobot);
+	scheduleIn(700, onCubeRestart);
 	setBlockingCallback(NULL);
 	fastSpeedChange(-0.05);
 }
