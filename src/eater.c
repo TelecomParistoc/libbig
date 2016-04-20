@@ -80,7 +80,7 @@ static void stopEating() {
 static void onCubeBlocking();
 // try to move forward again
 static void onCubeRestart() {
-	static angle = 15;
+	static int angle = 15;
 	queueSpeedChange(0.05, NULL);
 	turnOf(angle);
 	angle = -angle;
