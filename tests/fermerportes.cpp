@@ -17,7 +17,7 @@ bool blocked = false;
 bool seeBlocked = false;
 
 int way = 0;
-std::pair<double,double> curPos = std::pair<double,double>(40,1000);
+std::pair<double,double> curPos = std::pair<double,double>(129,1254);
 
 void go()
 {start = true;}
