@@ -44,6 +44,9 @@ int main()
     start = true;
     onCollisionDetect(&checkCollisionAndReact);
 
+    PathFollower::setRadiusPositiveSpeed(180);
+    PathFollower::setRadiusNegativeSpeed(120);
+
     setMoveStartCallback(&PathFollower::updateAngleStartingMove);
     setMoveEndCallback(&PathFollower::updatePositionEndingMove);
     setCurrentLocation(curPos.first,curPos.second);
