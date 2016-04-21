@@ -4,6 +4,7 @@
 #include <robotdriver/motordriver.h>
 #include <robotdriver/toolboxdriver.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include "robot.h"
 #include "umbrella.h"
 #include "eater.h"
