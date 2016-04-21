@@ -98,7 +98,6 @@ int main()
             }
 
         curPos = PathFollower::getCurrentPos();
-        curDir = PathFollower::getCurrentDirection();
         std::cout<<curPos.first<<" "<<curPos.second<<";"<<curDir.first<<" "<<curDir.second<<std::endl;
 
         waitFor(50);
