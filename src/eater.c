@@ -85,13 +85,13 @@ static void turnEnd4() {
 }
 static void backwardFinished(struct motionElement * a) {
 	if(a) {}
-	setTargetHeading(100, turnEnd4);
+	setTargetHeading(115, turnEnd4);
 }
 static void turnEnd3() {
 	setRobotDistance(0);
 	setBrush();
 	queueSpeedChange(-0.1, NULL);
-	queueStopAt(-40, backwardFinished);
+	queueStopAt(-50, backwardFinished);
 }
 static void turnEnd2() {
 	setTargetHeading(170, turnEnd3);
@@ -101,7 +101,7 @@ static void turnEnd2() {
 static void turnBack(struct motionElement * a) {
 	if(a) {}
 	startEater();
-	setTargetHeading(120, turnEnd2);
+	setTargetHeading(110, turnEnd2);
 	setSideBlockingCallback(turnEnd2);
 }
 
