@@ -91,7 +91,7 @@ static void stopAndEat() {
 }
 static void turnEnd4() {
 	fastSpeedChange(0.1);
-	queueSpeedChangeAt(70, 0.01, NULL);
+	queueSpeedChangeAt(80, 0.01, NULL);
 	setRobotDistance(0);
 	setSideBlockingCallback(stopAndEat);
 }
@@ -112,23 +112,20 @@ static void backFromCubes(struct motionElement * a) {
 }
 static void turnEnd2() {
 	setRobotDistance(0);
-	queueSpeedChange(-0.1, NULL);
-	queueStopAt(-50, backFromCubes);
-	setSideBlockingCallback(NULL);
-}
-
-static void turnBack(struct motionElement * a) {
-	if(a) {}
-	startEater();
 	fastSpeedChange(0);
-	setTargetHeading(110, turnEnd2);
-	setSideBlockingCallback(turnEnd2);
+	queueSpeedChange(-0.2, NULL);
+	queueStopAt(-60, backFromCubes);
+	setSideBlockingCallback(NULL);
 }
 static void turnBack2() {
 	startEater();
 	fastSpeedChange(0);
 	setTargetHeading(110, turnEnd2);
 	setSideBlockingCallback(turnEnd2);
+}
+static void turnBack(struct motionElement * a) {
+	if(a) {}
+	turnBack2();
 }
 static void turnEnd() {
 	setBrushMiddle();
@@ -139,7 +136,7 @@ static void turnEnd() {
 }
 // start collecting cubes : first destroy cube stack
 void startEaterAction() {
-	scheduleIn(20000, stopEating);
-	setTargetHeading(160, turnEnd);
+	scheduleIn(25000, stopEating);
+	setTargetHeading(130, turnEnd);
 	initBrush();
 }
