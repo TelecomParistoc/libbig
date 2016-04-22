@@ -91,19 +91,19 @@ static void stopAndEat() {
 }
 static void turnEnd4() {
 	fastSpeedChange(0.1);
-	queueSpeedChangeAt(50, 0.01, NULL);
+	queueSpeedChangeAt(70, 0.01, NULL);
 	setRobotDistance(0);
 	setSideBlockingCallback(stopAndEat);
 }
 static void backwardFinished(struct motionElement * a) {
 	if(a) {}
-	setTargetHeading(120, turnEnd4);
+	setTargetHeading(115, turnEnd4);
 }
 static void turnEnd3() {
 	setRobotDistance(0);
 	setBrush();
 	queueSpeedChange(-0.1, NULL);
-	queueStopAt(-100, backwardFinished);
+	queueStopAt(-110, backwardFinished);
 }
 
 static void backFromCubes(struct motionElement * a) {
