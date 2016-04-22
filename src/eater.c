@@ -80,7 +80,7 @@ static void stopEating() {
 }
 
 static void turnEnd4() {
-	fastSpeedChange(0.2);
+	fastSpeedChange(0.1);
 	queueSpeedChangeAt(50, 0.01, NULL);
 	setRobotDistance(0);
 }
