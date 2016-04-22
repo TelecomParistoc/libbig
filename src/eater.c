@@ -80,7 +80,8 @@ static void stopEating() {
 }
 
 static void turnEnd4() {
-	fastSpeedChange(0.01);
+	fastSpeedChange(0.2);
+	queueSpeedChangeAt(50, 0.01, NULL)
 	setRobotDistance(0);
 }
 static void backwardFinished(struct motionElement * a) {
