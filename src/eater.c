@@ -108,6 +108,7 @@ static void turnEnd2() {
 static void turnBack(struct motionElement * a) {
 	if(a) {}
 	startEater();
+	fastSpeedChange(0);
 	setTargetHeading(110, turnEnd2);
 	setSideBlockingCallback(turnEnd2);
 }
