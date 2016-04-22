@@ -88,7 +88,7 @@ static void moveAndEat() {
 static void stopAndEat() {
 	fastSpeedChange(-0.01);
 	setSideBlockingCallback(NULL);
-	scheduleIn(500, moveAndEat);
+	scheduleIn(800, moveAndEat);
 }
 static void turnEnd4() {
 	fastSpeedChange(0.1);
@@ -138,6 +138,6 @@ static void turnEnd() {
 // start collecting cubes : first destroy cube stack
 void startEaterAction() {
 	scheduleIn(20000, stopEating);
-	setTargetHeading(130, turnEnd);
+	setTargetHeading(140, turnEnd);
 	initBrush();
 }
