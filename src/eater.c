@@ -79,6 +79,7 @@ static void stopEating() {
 	queueStopAt(0, eaterActionFinished);
 }
 
+static void stopAndEat();
 static void moveAndEat() {
 	fastSpeedChange(0.01);
 	setSideBlockingCallback(stopAndEat);
