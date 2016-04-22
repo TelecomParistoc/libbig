@@ -101,7 +101,6 @@ static void backFromCubes(struct motionElement * a) {
 }
 static void turnEnd2() {
 	setRobotDistance(0);
-	fastSpeedChange(0);
 	queueSpeedChange(-0.1, NULL);
 	queueStopAt(-50, backFromCubes);
 	setSideBlockingCallback(NULL);
@@ -110,6 +109,7 @@ static void turnEnd2() {
 static void turnBack(struct motionElement * a) {
 	if(a) {}
 	startEater();
+	fastSpeedChange(0);
 	setTargetHeading(110, turnEnd2);
 	setSideBlockingCallback(turnEnd2);
 }
