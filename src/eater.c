@@ -91,10 +91,17 @@ static void turnEnd3() {
 	setRobotDistance(0);
 	setBrush();
 	queueSpeedChange(-0.1, NULL);
-	queueStopAt(-56, backwardFinished);
+	queueStopAt(-40, backwardFinished);
+}
+
+static void backFromCubes(struct motionElement * a) {
+	if(a) {}
+	setTargetHeading(170, turnEnd3);
 }
 static void turnEnd2() {
-	setTargetHeading(150, turnEnd3);
+	setRobotDistance(0);
+	queueSpeedChange(-0.1, NULL);
+	queueStopAt(-20, backFromCubes);
 	setSideBlockingCallback(NULL);
 }
 
