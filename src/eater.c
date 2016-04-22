@@ -94,12 +94,14 @@ static void turnEnd3() {
 }
 static void turnEnd2() {
 	setTargetHeading(170, turnEnd3);
+	setSideBlockingCallback(NULL);
 }
 
 static void turnBack(struct motionElement * a) {
 	if(a) {}
 	startEater();
 	setTargetHeading(100, turnEnd2);
+	setSideBlockingCallback(turnEnd2);
 }
 
 static void turnEnd() {
