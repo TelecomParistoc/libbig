@@ -13,7 +13,7 @@
 #define BRUSHSPEED 500
 #define BRUSHON    812
 #define BRUSHOFF   280
-#define BRUSHMIDDLE 700
+#define BRUSHMIDDLE 720
 
 // Ax-12 that controls the conveyor belt
 //TODO Check rotation direction
@@ -72,6 +72,7 @@ void stopEater(){
 static void eaterActionFinished(struct motionElement * a) {
 	if(a) {}
 	printf("finished eating\n");
+	setTargetHeading(0, NULL);
 }
 static void stopEating() {
 	stopEater();
@@ -136,7 +137,7 @@ static void turnEnd() {
 }
 // start collecting cubes : first destroy cube stack
 void startEaterAction() {
-	scheduleIn(25000, stopEating);
+	scheduleIn(20000, stopEating);
 	setTargetHeading(130, turnEnd);
 	initBrush();
 }
