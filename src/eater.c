@@ -113,13 +113,18 @@ static void turnBack(struct motionElement * a) {
 	setTargetHeading(110, turnEnd2);
 	setSideBlockingCallback(turnEnd2);
 }
-
+static void turnBack2() {
+	startEater();
+	fastSpeedChange(0);
+	setTargetHeading(110, turnEnd2);
+	setSideBlockingCallback(turnEnd2);
+}
 static void turnEnd() {
 	setBrushMiddle();
 	setRobotDistance(0);
 	queueSpeedChange(0.1, NULL);
 	queueStopAt(50, turnBack);
-	setSideBlockingCallback(turnBack);
+	setSideBlockingCallback(turnBack2);
 }
 // start collecting cubes : first destroy cube stack
 void startEaterAction() {
