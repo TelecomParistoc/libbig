@@ -98,11 +98,11 @@ static void turnEnd5() {
 	queueSpeedChange(-0.1, NULL);
 	enableHeadingControl(0);
 	setBlockingCallback(reachedZone);
-}
+}/*
 static void nearZone() {
 	setTargetHeading(90, turnEnd5);
 }
-
+*/
 static void eaterActionFinished(struct motionElement * a) {
 	if(a) {}
 	printf("finished eating\n");
