@@ -79,25 +79,38 @@ static void stopEating() {
 	queueStopAt(0, eaterActionFinished);
 }
 
-static void turnEnd3() {
+static void turnEnd4() {
 	fastSpeedChange(0.02);
 	setRobotDistance(0);
 }
+static void backwardFinished(struct motionElement * a) {
+	if(a) {}
+	setTargetHeading(100, turnEnd4);
+}
+static void turnEnd3() {
+	setRobotDistance(0);
+	queueSpeedChange(-0.1, NULL);
+	queueStopAt(-100, backwardFinished);
+}
 static void turnEnd2() {
-	setBrush();
-	setTargetHeading(90, turnEnd3);
+	setTargetHeading(100, turnEnd3);
 }
-static void turnBack() {
+
+static void turnBack(struct motionElement * a) {
+	if(a) {}
 	startEater();
-	setTargetHeading(50, turnEnd2);
+	setTargetHeading(100, turnEnd2);
 }
+
 static void turnEnd() {
 	setBrushMiddle();
-	scheduleIn(700, turnBack);
+	setRobotDistance(0);
+	queueSpeedChange(0.1, NULL);
+	queueStopAt(50, turnBack);
 }
 // start collecting cubes : first destroy cube stack
 void startEaterAction() {
 	scheduleIn(20000, stopEating);
-	setTargetHeading(170, turnEnd);
+	setTargetHeading(160, turnEnd);
 	initBrush();
 }
