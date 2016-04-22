@@ -119,6 +119,7 @@ static void turnEnd() {
 	setRobotDistance(0);
 	queueSpeedChange(0.1, NULL);
 	queueStopAt(50, turnBack);
+	setSideBlockingCallback(turnBack);
 }
 // start collecting cubes : first destroy cube stack
 void startEaterAction() {
