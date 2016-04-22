@@ -102,11 +102,11 @@ static void turnEnd5() {
 static void nearZone() {
 	setTargetHeading(90, turnEnd5);
 }
+
 static void eaterActionFinished(struct motionElement * a) {
 	if(a) {}
 	printf("finished eating\n");
-	setCurrentLocation(1105, 1657);
-	ffollow("cubes2zone", nearZone);
+	setTargetHeading(90,turnEnd5);
 }
 static void stopEating() {
 	stopEater();
