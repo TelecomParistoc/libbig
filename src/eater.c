@@ -91,10 +91,10 @@ static void turnEnd3() {
 	setRobotDistance(0);
 	setBrush();
 	queueSpeedChange(-0.1, NULL);
-	queueStopAt(-50, backwardFinished);
+	queueStopAt(-56, backwardFinished);
 }
 static void turnEnd2() {
-	setTargetHeading(170, turnEnd3);
+	setTargetHeading(150, turnEnd3);
 	setSideBlockingCallback(NULL);
 }
 
