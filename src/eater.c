@@ -10,9 +10,10 @@
 // Ax-12 that controls the brushes
 
 #define AXBRUSH    133
-#define BRUSHSPEED 100
-#define BRUSHON    802
-#define BRUSHOFF   262
+#define BRUSHSPEED 500
+#define BRUSHON    812
+#define BRUSHOFF   280
+#define BRUSHMIDDLE 750
 
 // Ax-12 that controls the conveyor belt
 //TODO Check rotation direction
@@ -30,23 +31,28 @@
 
 static void (*setBrushCallback)(void) = NULL;
 static void (*unsetBrushCallback)(void) = NULL;
+static void (*brushMiddleCallback)(void) = NULL;
 
-void initBrush(){
+void initBrush() {
 	axSetTorqueSpeed(AXBRUSH, -1, BRUSHSPEED, 0);
 }
 
-void setBrush(){
+void setBrush() {
 	axMove(AXBRUSH, BRUSHON, setBrushCallback);
 }
-
-void unsetBrush(){
+void setBrushMiddle() {
+	axMove(AXBRUSH, BRUSHMIDDLE, brushMiddleCallback);
+}
+void unsetBrush() {
 	axMove(AXBRUSH, BRUSHOFF, unsetBrushCallback);
 }
 
 void setSetBrushCallback(void (*callback)(void)){
 	setBrushCallback = callback;
 }
-
+void setBrushMiddleCallback(void (*callback)(void)){
+	brushMiddleCallback = callback;
+}
 void setUnsetBrushCallback(void (*callback)(void)){
 	unsetBrushCallback = callback;
 }
@@ -61,47 +67,37 @@ void stopEater(){
 	axSetTorqueSpeed(AXCONVEYOR,   -1, 0, 1);
 	axSetTorqueSpeed(AXLEFTBRUSH,  -1, 0, 1);
 	axSetTorqueSpeed(AXRIGHTBRUSH, -1, 0, 1);
-}
+}v
 
 static void eaterActionFinished(struct motionElement * a) {
 	if(a) {}
 	printf("finished eating\n");
 }
 
-// stop collecting cubes and move backward to the place where the action started
 static void stopEating() {
 	stopEater();
-	// move backward
-	queueSpeedChange(-0.1, NULL);
-	setTargetHeading(135, NULL);
+	queueSpeedChange(-0.2, NULL);
 	queueStopAt(0, eaterActionFinished);
 }
-
-static void onCubeBlocking();
-// try to move forward again
-static void onCubeRestart() {
-	static int angle = 15;
-	queueSpeedChange(0.05, NULL);
-	turnOf(angle, NULL);
-	angle = -angle;
-	setBlockingCallback(onCubeBlocking);
-	printf("resume moving\n");
+static void turnEnd3() {
+	fastSpeedChange(0.02);
+	setRobotDistance(0);
 }
-// avoid forcing when hitting a cube
-static void onCubeBlocking() {
-	scheduleIn(700, onCubeRestart);
-	setBlockingCallback(NULL);
-	fastSpeedChange(-0.05);
+static void turnEnd2() {
+	setBrush();
+	setTargetHeading(90, turnEnd3);
 }
-// then go and eat cubes !
-static void goForCubes() {
-	setBlockingCallback(onCubeBlocking);
-	queueSpeedChange(0.1, NULL);
-	// set up the timeout
-	scheduleIn(10000, stopEating);
+static void turnBack() {
 	startEater();
+	setTargetHeading(50, turnEnd2);
 }
-// start collecting cubes : first turn toward cubes
+static void turnEnd() {
+	setBrushMiddle();
+	scheduleIn(700, turnBack);
+}
+// start collecting cubes : first destroy cube stack
 void startEaterAction() {
-	setTargetHeading(135, goForCubes);
+	scheduleIn(20000, stopEating);
+	setTargetHeading(170, turnEnd);
+	initBrush();
 }
