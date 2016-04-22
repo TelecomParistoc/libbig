@@ -13,7 +13,7 @@
 #define BRUSHSPEED 500
 #define BRUSHON    812
 #define BRUSHOFF   280
-#define BRUSHMIDDLE 700
+#define BRUSHMIDDLE 680
 
 // Ax-12 that controls the conveyor belt
 //TODO Check rotation direction
@@ -101,15 +101,15 @@ static void backFromCubes(struct motionElement * a) {
 }
 static void turnEnd2() {
 	setRobotDistance(0);
+	fastSpeedChange(0);
 	queueSpeedChange(-0.1, NULL);
-	queueStopAt(-60, backFromCubes);
+	queueStopAt(-50, backFromCubes);
 	setSideBlockingCallback(NULL);
 }
 
 static void turnBack(struct motionElement * a) {
 	if(a) {}
 	startEater();
-	fastSpeedChange(0);
 	setTargetHeading(110, turnEnd2);
 	setSideBlockingCallback(turnEnd2);
 }
