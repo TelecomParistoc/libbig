@@ -91,7 +91,7 @@ static void turnEnd3() {
 	setRobotDistance(0);
 	setBrush();
 	queueSpeedChange(-0.1, NULL);
-	queueStopAt(-60, backwardFinished);
+	queueStopAt(-80, backwardFinished);
 }
 
 static void backFromCubes(struct motionElement * a) {
