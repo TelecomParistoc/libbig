@@ -134,7 +134,7 @@ static void turnEnd() {
 	setBrushMiddle();
 	setRobotDistance(0);
 	queueSpeedChange(0.1, NULL);
-	queueStopAt(50, turnBack);
+	queueStopAt(80, turnBack);
 	setSideBlockingCallback(turnBack2);
 }
 // start collecting cubes : first destroy cube stack
