@@ -4,6 +4,7 @@
 #include <robotdriver/motordriver.h>
 #include <robotdriver/toolboxdriver.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include "robot.h"
 #include "umbrella.h"
 #include "eater.h"
@@ -42,7 +43,7 @@ void initRobot() {
 	setRobotHeading(0);
 	axReset();
     setRotationDirection(getTeam() == PURPLE_TEAM);
-    
+
 	enableSensorCallback(1);
 	disableSensorCallback(2);
 	disableSensorCallback(3);
@@ -70,6 +71,16 @@ void onCollisionDetect(void (*callback)(int)) {
 }
 void onCollisionEnd(void (*callback)(int)) {
     collisionEndCallback = callback;
+}
+
+int isRobotFront() {
+    printf("check front (positive speed) %d %d %d %d\n",collisions[0],collisions[1],collisions[2],collisions[3]);
+    return collisions[1]||collisions[2];
+}
+
+int isRobotBehind() {
+    printf("check behind (negative speed) %d %d %d %d\n",collisions[0],collisions[1],collisions[2],collisions[3]);
+    return collisions[0];
 }
 
 int getTableConfig() {

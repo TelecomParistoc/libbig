@@ -67,18 +67,18 @@ void stopEater(){
 	axSetTorqueSpeed(AXCONVEYOR,   -1, 0, 1);
 	axSetTorqueSpeed(AXLEFTBRUSH,  -1, 0, 1);
 	axSetTorqueSpeed(AXRIGHTBRUSH, -1, 0, 1);
-}v
+}
 
 static void eaterActionFinished(struct motionElement * a) {
 	if(a) {}
 	printf("finished eating\n");
 }
-
 static void stopEating() {
 	stopEater();
 	queueSpeedChange(-0.2, NULL);
 	queueStopAt(0, eaterActionFinished);
 }
+
 static void turnEnd3() {
 	fastSpeedChange(0.02);
 	setRobotDistance(0);

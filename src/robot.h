@@ -22,6 +22,12 @@ void onCollisionDetect(void (*callback)(int));
  * argument collisionSensor is the sensor that stopped detecting an obstacle */
 void onCollisionEnd(void (*callback)(int));
 /* collision sensors as used in onCollisionDetect/onCollisionEnd : */
+
+/* check if a robot is detected in front (when moving forward)*/
+int isRobotFront();
+/* check if a robot is detected behind (when moving backward) */
+int isRobotBehind();
+
 #define REAR_LEFT_COLLISION 0
 #define REAR_RIGHT_COLLISION 1
 #define FRONT_LEFT_COLLISION 2
