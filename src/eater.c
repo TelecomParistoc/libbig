@@ -81,11 +81,11 @@ void stopEater(){
 	axSetTorqueSpeed(AXRIGHTBRUSH, -1, 0, 1);
 }
 
-static robotEmpty() {
+static void robotEmpty() {
 	stopEater();
 	closeDoor();
 }
-static reachedZone() {
+static void reachedZone() {
 	fastSpeedChange(0);
 	setBlockingCallback(NULL);
 	enableHeadingControl(1);
@@ -93,7 +93,7 @@ static reachedZone() {
 	openDoor();
 	scheduleIn(5000, robotEmpty);
 }
-static turnEnd5() {
+static void turnEnd5() {
 	queueSpeedChange(-0.1, NULL);
 	enableHeadingControl(0);
 	setBlockingCallback(reachedZone);
