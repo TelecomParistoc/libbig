@@ -9,11 +9,16 @@
 
 // Ax-12 that controls the brushes
 
-#define AXBRUSH    133
+#define AXBRUSH 133
 #define BRUSHSPEED 500
-#define BRUSHON    812
-#define BRUSHOFF   280
+#define BRUSHON 812
+#define BRUSHOFF 280
 #define BRUSHMIDDLE 720
+
+#define AXDOOR 141
+#define DOORSPEED 400
+#define AXDOORCLOSED 670
+#define AXDOOROPEN 248
 
 // Ax-12 that controls the conveyor belt
 //TODO Check rotation direction
@@ -35,6 +40,7 @@ static void (*brushMiddleCallback)(void) = NULL;
 
 void initBrush() {
 	axSetTorqueSpeed(AXBRUSH, -1, BRUSHSPEED, 0);
+	axSetTorqueSpeed(AXDOOR, -1, DOORSPEED, 0);
 }
 
 void setBrush() {
@@ -57,6 +63,12 @@ void setUnsetBrushCallback(void (*callback)(void)){
 	unsetBrushCallback = callback;
 }
 
+void openDoor() {
+	axMove(AXDOOR, AXDOOROPEN, NULL);
+}
+void closeDoor() {
+	axMove(AXDOOR, AXDOORCLOSED, NULL);
+}
 void startEater(){
 	axSetTorqueSpeed(AXCONVEYOR,   -1, CONVEYORSPEED, 1);
 	axSetTorqueSpeed(AXLEFTBRUSH,  -1, AXLEFTSPEED,   1);
@@ -69,10 +81,30 @@ void stopEater(){
 	axSetTorqueSpeed(AXRIGHTBRUSH, -1, 0, 1);
 }
 
+static robotEmpty() {
+	stopEater();
+	closeDoor();
+}
+static reachedZone() {
+	fastSpeedChange(0);
+	setBlockingCallback(NULL);
+	enableHeadingControl(1);
+	startEater();
+	openDoor();
+	scheduleIn(5000, robotEmpty);
+}
+static turnEnd5() {
+	queueSpeedChange(-0.1, NULL);
+	enableHeadingControl(0);
+	setBlockingCallback(reachedZone);
+}
+static void nearZone() {
+	setTargetHeading(90, turnEnd5);
+}
 static void eaterActionFinished(struct motionElement * a) {
 	if(a) {}
 	printf("finished eating\n");
-	setTargetHeading(0, NULL);
+	ffollow("cubes2zone", nearZone);
 }
 static void stopEating() {
 	stopEater();
