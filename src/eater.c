@@ -86,7 +86,7 @@ static void turnEnd4() {
 }
 static void backwardFinished(struct motionElement * a) {
 	if(a) {}
-	setTargetHeading(115, turnEnd4);
+	setTargetHeading(120, turnEnd4);
 }
 static void turnEnd3() {
 	setRobotDistance(0);
