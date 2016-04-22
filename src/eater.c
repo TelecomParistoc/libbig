@@ -3,6 +3,7 @@
 #include <robotdriver/headingcontroller.h>
 #include <robotdriver/motordriver.h>
 #include <robotdriver/toolboxdriver.h>
+#include <pathfollower/pathfollower.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include "eater.h"
