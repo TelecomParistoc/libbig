@@ -105,6 +105,7 @@ static void nearZone() {
 static void eaterActionFinished(struct motionElement * a) {
 	if(a) {}
 	printf("finished eating\n");
+	setCurrentLocation(1105, 1657);
 	ffollow("cubes2zone", nearZone);
 }
 static void stopEating() {
