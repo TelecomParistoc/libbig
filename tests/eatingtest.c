@@ -10,7 +10,7 @@ static void arrivedNearCubes() {
 int main() {
 	initRobot();
     setCurrentLocation(129, 1255);
-    ffollow("start2cubes2", arrivedNearCubes);
+    ffollow("start2cubes", arrivedNearCubes);
 	while(1);
 	return 0;
 }
