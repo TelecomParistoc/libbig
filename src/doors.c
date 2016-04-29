@@ -49,7 +49,7 @@ void resumeDoorsAction() {
             queueStopAt(-190, closeDoor);
             break;
         case 4:
-            closeDoor();
+            closeDoor(NULL);
             break;
     }
 }
