@@ -223,7 +223,7 @@ void resumeEaterAction() {
 			stopEating();
 			break;
 		case 9:
-			nearZone();
+			nearZone(NULL);
 			break;
 	}
 }
