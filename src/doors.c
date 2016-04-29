@@ -56,7 +56,7 @@ void resumeDoorsAction() {
 }
 void pauseDoorsAction() {
     // stop turning
-    setTargetHeading(getRobotHeading());
+    setTargetHeading(getRobotHeading(), NULL);
     // stop moving
     clearMotionQueue();
     queueSpeedChange(0, NULL);

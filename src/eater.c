@@ -134,7 +134,7 @@ static void stopAndEat() {
 }
 static void turnEnd4() {
 	setActiveDetectors(none);
-	queueSpeedChange(0.1);
+	queueSpeedChange(0.1, NULL);
 	queueSpeedChangeAt(40, 0.01, NULL);
 	setRobotDistance(0);
 	setSideBlockingCallback(stopAndEat);
@@ -190,7 +190,7 @@ void startEaterAction() {
 
 void pauseEaterAction() {
 	// stop turning
-    setTargetHeading(getRobotHeading());
+    setTargetHeading(getRobotHeading(), NULL);
     // stop moving
     clearMotionQueue();
     queueSpeedChange(0, NULL);

@@ -17,7 +17,7 @@ void stopEater();
 
 void pauseEaterAction();
 void resumeEaterAction();
-void isEaterActionFinished();
+int isEaterActionFinished();
 void startEaterAction();
 
 #ifdef __cplusplus
