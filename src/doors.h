@@ -8,7 +8,7 @@ extern "C" {
 void startDoorsAction();
 void pauseDoorsAction();
 void resumeDoorsAction();
-void isDoorsActionFinished();
+int isDoorsActionFinished();
 
 #ifdef __cplusplus
 }

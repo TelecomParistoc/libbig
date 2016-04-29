@@ -8,7 +8,6 @@
 #include <stdio.h>
 #include "doors.h"
 
-static void (*doorsCallback)(void) = NULL;
 static int actionState = 0;
 
 int isDoorsActionFinished() {
@@ -22,7 +21,7 @@ static void actionFinished() {
 static void closeDoor(struct motionElement * a) {
     if(a) {}
     actionState=4;
-    setRobotHeading(210, actionFinished);
+    setTargetHeading(210, actionFinished);
     setSideBlockingCallback(actionFinished);
 }
 static void moveBackward() {
@@ -34,7 +33,7 @@ static void moveBackward() {
 static void turnEnd() {
     actionState=2;
     setSideBlockingCallback(NULL);
-    setRobotHeading(180, moveBackward);
+    setTargetHeading(180, moveBackward);
 }
 
 void resumeDoorsAction() {
@@ -68,6 +67,6 @@ void startDoorsAction() {
     else
         setActiveDetectors(left);
 
-    setRobotHeading(154, turnEnd);
+    setTargetHeading(154, turnEnd);
     setSideBlockingCallback(turnEnd);
 }
