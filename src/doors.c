@@ -11,15 +11,13 @@
 static void (*doorsCallback)(void) = NULL;
 static int actionState = 0;
 
-void onDoorsActionFinished(void (*callback)(void)) {
-    doorsCallback = callback;
+int isDoorsActionFinished() {
+    return actionState == 5;
 }
 static void actionFinished() {
     setSideBlockingCallback(NULL);
     setCurrentLocation(582, 1793);
-    
-    if(doorsCallback != NULL)
-        doorsCallback();
+    actionState = 5;
 }
 static void closeDoor(struct motionElement * a) {
     if(a) {}
@@ -39,7 +37,7 @@ static void turnEnd() {
     setRobotHeading(180, moveBackward);
 }
 
-void resumeDoorsActions() {
+void resumeDoorsAction() {
     switch (actionState) {
         case 1:
             startDoorsAction();
@@ -56,7 +54,7 @@ void resumeDoorsActions() {
             break;
     }
 }
-void pauseDoorsActions() {
+void pauseDoorsAction() {
     // stop turning
     setTargetHeading(getRobotHeading());
     // stop moving

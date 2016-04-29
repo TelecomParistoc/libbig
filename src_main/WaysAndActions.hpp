@@ -1,4 +1,6 @@
 #include "Action.hpp"
+#include <librobot/doors.h>
+#include <librobot/eater.h>
 
 /**Attention : ceci n'est qu'un exemple complètement irréaliste.
 * Chaque robot doit avoir son propre fichier ways_and_actions qui doit être rempli en conséquences
@@ -9,8 +11,8 @@ std::vector<Action> actions;
 
 void initWaysAndActions()
 {
-    actions.push_back(Action());
-    actions.push_back(Action(&pecher_start,&pecher_pause,&pecher_continue,&pecher_isFinished));
-    actions.push_back(Action(&relacher_start,&relacher_pause,&relacher_continue,&relacher_isFinished));
+    actions.push_back(Action()); // DO NOT REMOVE
+    actions.push_back(Action(startEaterAction,&pecher_pause,&pecher_continue,&pecher_isFinished)); // TODO
+    actions.push_back(Action(startDoorsAction, pauseDoorsAction, resumeDoorsAction, isDoorsActionFinished));
     //etc ...
 }

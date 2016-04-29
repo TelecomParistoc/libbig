@@ -6,9 +6,9 @@ extern "C" {
 #endif
 
 void startDoorsAction();
-void pauseDoorsActions();
-void resumeDoorsActions();
-void onDoorsActionFinished();
+void pauseDoorsAction();
+void resumeDoorsAction();
+void isDoorsActionFinished();
 
 #ifdef __cplusplus
 }
