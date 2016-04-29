@@ -10,9 +10,12 @@
 #include "eater.h"
 
 static void (*gameStartCallback)(void) = NULL;
+static void (*gameStopCallback)(void) = NULL;
 static void (*collisionDetectCallback)(int) = NULL;
 static void (*collisionEndCallback)(int) = NULL;
 static int collisions[4] = {0, 0, 0, 0};
+static int lastJack = 0;
+static collisionConfig_t collConfig = all;
 
 static void collisionsCallback() {
     for(int i=0; i<4; i++) {
@@ -31,8 +34,14 @@ static void collisionsCallback() {
     }
 }
 static void sensorsCallback() {
-    if(gameStartCallback != NULL && getSensor(1))
+    if(gameStartCallback != NULL && getSensor(1) && !lastJack) {
         gameStartCallback();
+        lastJack = 1;
+    }
+    if(gameStopCallback != NULL && !getSensor(1) && lastJack){
+        gameStopCallback();
+        lastJack = 0;
+    }
 }
 
 void initRobot() {
@@ -59,11 +68,17 @@ void initRobot() {
 	setCollisionsCallback(collisionsCallback);
 	initUmbrella();
 	initBrush();
+
+    lastJack = getSensor(1);
 }
 
 void onGameStart(void (*callback)(void)) {
     enableSensorCallback(1);
     gameStartCallback = callback;
+}
+void onGameStop(void (*callback)(void)) {
+    enableSensorCallback(1);
+    gameStopCallback = callback;
 }
 
 void onCollisionDetect(void (*callback)(int)) {
@@ -72,15 +87,40 @@ void onCollisionDetect(void (*callback)(int)) {
 void onCollisionEnd(void (*callback)(int)) {
     collisionEndCallback = callback;
 }
+void setActiveDetectors(collisionConfig_t config) {
+    collConfig = config;
+}
 
 int isRobotFront() {
     printf("check front (positive speed) %d %d %d %d\n",collisions[0],collisions[1],collisions[2],collisions[3]);
-    return collisions[1]||collisions[2];
+    switch (collConfig) {
+        case all:
+        case front:
+            return collisions[FRONT_RIGHT_COLLISION] || collisions[FRONT_LEFT_COLLISION];
+        case left:
+            return collisions[FRONT_LEFT_COLLISION];
+        case right:
+            return collisions[FRONT_RIGHT_COLLISION];
+        case rear:
+        case none:
+            return 0;
+    }
 }
 
 int isRobotBehind() {
     printf("check behind (negative speed) %d %d %d %d\n",collisions[0],collisions[1],collisions[2],collisions[3]);
-    return collisions[0];
+    switch (collConfig) {
+        case all:
+        case rear:
+            return (!collisions[REAR_RIGHT_COLLISION]) || (!collisions[REAR_LEFT_COLLISION]);
+        case left:
+            return (!collisions[REAR_LEFT_COLLISION]);
+        case right:
+            return (!collisions[REAR_RIGHT_COLLISION]);
+        case front:
+        case none:
+            return 0;
+    }
 }
 
 int getTableConfig() {

@@ -1,5 +1,5 @@
 TARGET = librobot.so
-SRCS = robot.c umbrella.c eater.c
+SRCS = robot.c umbrella.c eater.c doors.c
 HEADERS = $(addprefix src/, ${SRCS:.c=.h})
 OBJECTS = $(addprefix build/,${SRCS:.c=.o})
 CC=gcc
@@ -7,7 +7,7 @@ CFLAGS = -O2 -std=gnu99 -Wall -Werror -fpic
 LDFLAGS= -shared -lrobotdriver
 PREFIX = /usr/local
 VPATH = build/
-TESTS = tests/robottest tests/AX12position tests/umbrellatest tests/eatertest tests/eatingtest
+TESTS = tests/robottest tests/AX12position tests/umbrellatest tests/eatertest tests/eatingtest test/doorstest
 vpath %.c src/
 vpath %.h src/
 

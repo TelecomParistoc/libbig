@@ -82,10 +82,17 @@ void stopEater(){
 	axSetTorqueSpeed(AXRIGHTBRUSH, -1, 0, 1);
 }
 
+// ##############  the action moves : ##############
+static void (*eaterCallback)(void) = NULL;
+
+void onEaterActionFinished(void (*callback)(void)) {
+    eaterCallback = callback;
+}
+
 static void robotEmpty() {
 	stopEater();
 	closeDoor();
-	
+
 }
 static void unloadCubes() {
 	fastSpeedChange(0);

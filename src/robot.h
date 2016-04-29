@@ -12,6 +12,8 @@ void initRobot();
 /* calls the given function at the start of the game (when the start jack is
  * unplugged) */
 void onGameStart(void (*callback)(void));
+/* calls the given function if the start jack was just plugged in */
+void onGameStop(void (*callback)(void));
 
 /* calls the given function when a collision sensor detects a new obstacle.
  * the callback should be like void myCallback(int collisionSensor) {...}. The
@@ -27,6 +29,9 @@ void onCollisionEnd(void (*callback)(int));
 int isRobotFront();
 /* check if a robot is detected behind (when moving backward) */
 int isRobotBehind();
+
+typedef enum { all, front, rear, left, right, none } collisionConfig_t;
+void setActiveDetectors(collisionConfig_t config);
 
 #define REAR_LEFT_COLLISION 0
 #define REAR_RIGHT_COLLISION 1

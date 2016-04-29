@@ -1,6 +1,10 @@
 #ifndef EATER_H
 #define EATER_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 void initBrush();
 void setBrush();
 void unsetBrush();
@@ -12,5 +16,9 @@ void startEater();
 void stopEater();
 
 void startEaterAction();
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif
