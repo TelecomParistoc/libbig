@@ -4,9 +4,9 @@
 #include <robotdriver/motordriver.h>
 #include <robotdriver/toolboxdriver.h>
 #include <pathfollower/pathfollower.h>
-#include <librobot/robot.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include "robot.h"
 #include "eater.h"
 
 // Ax-12 that controls the brushes
