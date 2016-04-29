@@ -167,7 +167,7 @@ static void turnEnd2() {
 }
 static void turnBack() {
 	actionState = 3;
-	startEater();
+	//startEater();
 	fastSpeedChange(0);
 	setTargetHeading(110, turnEnd2);
 	setSideBlockingCallback(turnEnd2);
@@ -175,7 +175,6 @@ static void turnBack() {
 static void turnEnd() {
 	actionState = 2;
 	setBrushMiddle();
-	setRobotDistance(0);
 	queueSpeedChange(0.1, NULL);
 	setSideBlockingCallback(turnBack);
 }
@@ -202,6 +201,29 @@ void resumeEaterAction() {
 			break;
 		case 2:
 			turnEnd();
+			break;
+		case 3:
+			turnBack();
+			break;
+		case 4:
+			queueSpeedChange(-0.2, NULL);
+			queueStopAt(-60, backFromCubes);
+			break;
+		case 5:
+			backFromCubes(NULL);
+			break;
+		case 6:
+			queueSpeedChange(-0.1, NULL);
+			queueStopAt(-120, backwardFinished);
+			break;
+		case 7:
+			backwardFinished(NULL);
+			break;
+		case 8:
+			stopEating();
+			break;
+		case 9:
+			nearZone();
 			break;
 	}
 }
