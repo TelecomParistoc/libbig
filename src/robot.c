@@ -37,8 +37,7 @@ static void sensorsCallback() {
     if(gameStartCallback != NULL && getSensor(1) && !lastJack) {
         gameStartCallback();
         lastJack = 1;
-    }
-    if(gameStopCallback != NULL && !getSensor(1) && lastJack){
+    } else if(gameStopCallback != NULL && !getSensor(1) && lastJack){
         gameStopCallback();
         lastJack = 0;
     }
@@ -105,6 +104,7 @@ int isRobotFront() {
         case none:
             return 0;
     }
+    return 0;
 }
 
 int isRobotBehind() {
@@ -121,6 +121,7 @@ int isRobotBehind() {
         case none:
             return 0;
     }
+    return 0;
 }
 
 int getTableConfig() {

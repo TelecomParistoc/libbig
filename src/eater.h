@@ -15,6 +15,9 @@ void setOpenDoorCallback(void (*callback)(void));
 void startEater();
 void stopEater();
 
+void pauseEaterAction();
+void resumeEaterAction();
+void isEaterActionFinished();
 void startEaterAction();
 
 #ifdef __cplusplus

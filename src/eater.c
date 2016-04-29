@@ -82,17 +82,16 @@ void stopEater(){
 	axSetTorqueSpeed(AXRIGHTBRUSH, -1, 0, 1);
 }
 
-// ##############  the action moves : ##############
-static void (*eaterCallback)(void) = NULL;
-
-void onEaterActionFinished(void (*callback)(void)) {
-    eaterCallback = callback;
-}
+// ############## action moves : ##############
+static int actionState = 0;
 
 static void robotEmpty() {
+	actionState = 10;
 	stopEater();
 	closeDoor();
-
+	setCurrentLocation(1162, 1386);
+	setActiveDetectors(all);
+	actionState = 11;
 }
 static void unloadCubes() {
 	fastSpeedChange(0);
@@ -103,16 +102,20 @@ static void unloadCubes() {
 	scheduleIn(5000, robotEmpty);
 }
 static void turnEnd5() {
+	setActiveDetectors(none);
 	queueSpeedChange(-0.1, NULL);
 	enableHeadingControl(0);
 	setBlockingCallback(unloadCubes);
 }
 static void nearZone(struct motionElement * a) {
+	actionState = 9;
 	if(a) {}
 	printf("finished eating\n");
 	setTargetHeading(90,turnEnd5);
 }
 static void stopEating() {
+	actionState = 8;
+	setActiveDetectors(rear);
 	stopEater();
 	queueSpeedChange(-0.2, NULL);
 	queueStopAt(-230, nearZone);
@@ -129,16 +132,19 @@ static void stopAndEat() {
 	scheduleIn(800, moveAndEat);
 }
 static void turnEnd4() {
+	setActiveDetectors(none);
 	queueSpeedChange(0.1);
 	queueSpeedChangeAt(40, 0.01, NULL);
 	setRobotDistance(0);
 	setSideBlockingCallback(stopAndEat);
 }
 static void backwardFinished(struct motionElement * a) {
+	actionState = 7;
 	if(a) {}
 	setTargetHeading(115, turnEnd4);
 }
 static void turnEnd3() {
+	actionState = 6;
 	setRobotDistance(0);
 	setBrush();
 	queueSpeedChange(-0.1, NULL);
@@ -146,10 +152,12 @@ static void turnEnd3() {
 }
 
 static void backFromCubes(struct motionElement * a) {
+	actionState = 5;
 	if(a) {}
 	setTargetHeading(200, turnEnd3);
 }
 static void turnEnd2() {
+	actionState = 4;
 	setRobotDistance(0);
 	fastSpeedChange(0);
 	queueSpeedChange(-0.2, NULL);
@@ -157,12 +165,14 @@ static void turnEnd2() {
 	setSideBlockingCallback(NULL);
 }
 static void turnBack() {
+	actionState = 3;
 	startEater();
 	fastSpeedChange(0);
 	setTargetHeading(110, turnEnd2);
 	setSideBlockingCallback(turnEnd2);
 }
 static void turnEnd() {
+	actionState = 2;
 	setBrushMiddle();
 	setRobotDistance(0);
 	queueSpeedChange(0.1, NULL);
@@ -170,7 +180,30 @@ static void turnEnd() {
 }
 // start collecting cubes : first destroy cube stack
 void startEaterAction() {
+	actionState = 1;
 	scheduleIn(20000, stopEating);
 	setTargetHeading(150, turnEnd);
 	initBrush();
+	setActiveDetectors(rear);
+}
+
+void pauseEaterAction() {
+	// stop turning
+    setTargetHeading(getRobotHeading());
+    // stop moving
+    clearMotionQueue();
+    queueSpeedChange(0, NULL);
+}
+void resumeEaterAction() {
+	switch (actionState) {
+		case 1:
+			setTargetHeading(150, turnEnd);
+			break;
+		case 2:
+			turnEnd();
+			break;
+	}
+}
+int isEaterActionFinished() {
+	return actionState == 11;
 }
