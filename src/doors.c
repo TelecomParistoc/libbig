@@ -17,7 +17,7 @@ static void actionFinished() {
     if(actionState >= 5)
         return;
     setSideBlockingCallback(NULL);
-    setCurrentLocation(582, 1793);
+    setCurrentLocation(582, 1781);
     actionState = 5;
 }
 static void closeDoor(struct motionElement * a) {
@@ -49,7 +49,7 @@ static void recalibrationEnd() {
     fastSpeedChange(0);
     setBlockingCallback(NULL);
     setRobotDistance(0);
-    queueSpeedChange(-0.2, NULL);
+    queueSpeedChange(-0.3, NULL);
     queueStopAt(-230, closeFirstDoor);
 }
 void resumeDoorsAction() {
@@ -85,6 +85,6 @@ void startDoorsAction() {
         setActiveDetectors(left);
 
     enableHeadingControl(0);
-    queueSpeedChange(0.1, NULL);
+    queueSpeedChange(0.2, NULL);
     setBlockingCallback(recalibrationEnd);
 }
