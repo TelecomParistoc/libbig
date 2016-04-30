@@ -11,6 +11,10 @@ static void collisionEnd(int sensor) {
 static void gameStart() {
     printf("game start !\n");
 }
+static void gameStop() {
+    printf("game stop !\n");
+}
+
 
 int main () {
     initRobot();
@@ -19,6 +23,7 @@ int main () {
     onCollisionEnd(collisionEnd);
 
     onGameStart(gameStart);
+    onGameStop(gameStop),
 
     while(1) {
         // config switch
