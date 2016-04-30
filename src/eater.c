@@ -126,10 +126,14 @@ static void stopEating() {
 
 static void stopAndEat();
 static void moveAndEat() {
+	if(actionState >= 7)
+		return;
 	fastSpeedChange(0.01);
 	setSideBlockingCallback(stopAndEat);
 }
 static void stopAndEat() {
+	if(actionState >= 7)
+		return;
 	fastSpeedChange(-0.01);
 	setSideBlockingCallback(NULL);
 	scheduleIn(800, moveAndEat);
@@ -176,6 +180,7 @@ static void turnBack() {
 	fastSpeedChange(0);
 	setMaxAcceleration(0.1);
 	setTargetHeading(125, turnEnd2);
+	startEater();
 	//setSideBlockingCallback(turnEnd2);
 }
 static void turnEnd() {
