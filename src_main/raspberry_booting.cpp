@@ -1,6 +1,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <fcntl.h>
 #include <time.h>
 
 
@@ -13,7 +14,7 @@ int main(int argc, char* argv[])
     }
 
     FILE* f = NULL;
-    f = fopen("log.txt","a");
+    f = fopen("/var/log/log.txt","a");
     if(!f)
     {
         fprintf(stderr,"log.txt has not been found\n");
@@ -49,6 +50,15 @@ int main(int argc, char* argv[])
             fprintf(f, "Ending last instance at %s with status %d\n", buf, *status);
         }
         else
-            execl(argv[1],argv[1],NULL,NULL);
+        {
+            char path[100];
+            path[0] = 0;
+            strcat(path,"/var/log/");
+            strcat(path,buffer);
+            int fd = open(path,O_WRONLY|O_CREAT,0o400);
+            close(stdout);
+            dup2(stdout, fd);
+            execl(argv[1],argv[1],NULL);
+        }
     }
 }
