@@ -49,6 +49,8 @@ static void recalibrationEnd() {
     fastSpeedChange(0);
     setBlockingCallback(NULL);
     setRobotDistance(0);
+    setRobotHeading(180);
+    setTargetHeading(180, NULL);
     queueSpeedChange(-0.3, NULL);
     queueStopAt(-230, closeFirstDoor);
 }
