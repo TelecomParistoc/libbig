@@ -121,6 +121,7 @@ static void stopEating() {
 	stopEater();
 	queueSpeedChange(-0.2, NULL);
 	queueStopAt(-230, nearZone);
+	setSideBlockingCallback(NULL);
 }
 
 static void stopAndEat();
@@ -139,6 +140,7 @@ static void turnEnd4() {
 	queueSpeedChangeAt(40, 0.01, NULL);
 	setRobotDistance(0);
 	setSideBlockingCallback(stopAndEat);
+	startEater();
 }
 static void backwardFinished(struct motionElement * a) {
 	actionState = 7;
@@ -168,7 +170,6 @@ static void turnEnd2() {
 }
 static void turnBack() {
 	actionState = 3;
-	//startEater();
 	fastSpeedChange(0);
 	setTargetHeading(110, turnEnd2);
 	setSideBlockingCallback(turnEnd2);
