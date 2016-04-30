@@ -1,6 +1,7 @@
 #include <pathfollower/pathFollower.hpp>
 #include <librobot/doors.h>
 #include <librobot/eater.h>
+#include <librobot/umbrella.h>
 #include "Action.hpp"
 
 /**
@@ -13,7 +14,7 @@ std::pair<double,double> curPos = std::pair<double,double>(130,1255);
 
 void initWaysAndActions()
 {
-    actions.push_back(Action()); // DO NOT REMOVE
+    actions.push_back(Action(startUmbrellaAction, nullptr, nullptr, nullptr)); // DO NOT REMOVE
     actions.push_back(Action(startEaterAction, pauseEaterAction, resumeEaterAction, isEaterActionFinished));
     actions.push_back(Action(startDoorsAction, pauseDoorsAction, resumeDoorsAction, isDoorsActionFinished));
 

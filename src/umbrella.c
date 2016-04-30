@@ -1,6 +1,7 @@
 #include <robotdriver/toolboxdriver.h>
 #include <stdlib.h>
 #include "umbrella.h"
+#include <stdio.h>
 
 #define AXUMBRELLA 144
 #define UMBRELLASPEED 100
@@ -18,3 +19,14 @@ void deployUmbrella(){
 void closeUmbrella(){
 	axMove(AXUMBRELLA, UMBRELLADOWN, NULL);
 }
+
+static void onEndOfTheGame() {
+	initUmbrella();
+	deployUÃmbrella);
+	printf("umbrella deploying\n");
+}
+void startUmbrellaAction() {
+	scheduleIn(90000, onEndOfTheGame);
+	printf("umbrella scheduled\n");
+}
+

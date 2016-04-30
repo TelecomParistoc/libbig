@@ -2,15 +2,16 @@
 #include <librobot/doors.h>
 #include <librobot/eater.h>
 #include <pathfollower/pathfollower.h>
+#include <robotdriver/toolboxdriver.h>
 #include <stdlib.h>
 #include <stdio.h>
 
-static void arrivedAtDoor() {
+static void arrivedAtDoors() {
     printf("arrived at doors\n");
     startDoorsAction();
 }
-static void arrivedAtDoors() {
-    startDoorsAction();
+static void arrivedNearCubes() {
+    startEaterAction();
 }
 
 int main() {

@@ -5,4 +5,6 @@ void initUmbrella();
 void deployUmbrella();
 void closeUmbrella();
 
+void startUmbrellaAction();
+
 #endif
