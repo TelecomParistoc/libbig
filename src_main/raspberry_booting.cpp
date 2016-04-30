@@ -1,4 +1,6 @@
+#include <sys/wait.h>
 #include <unistd.h>
+#include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <fcntl.h>
@@ -14,10 +16,10 @@ int main(int argc, char* argv[])
     }
 
     FILE* f = NULL;
-    f = fopen("/var/log/log.txt","a");
+    f = fopen("/var/log/log_robot/main.txt","a");
     if(!f)
     {
-        fprintf(stderr,"log.txt has not been found\n");
+        fprintf(stderr,"/var/log/log_robot/main.txt has not been found\n");
         return 1;
     }
 
@@ -25,7 +27,7 @@ int main(int argc, char* argv[])
     struct tm *info;
     char buffer[80];
 
-    int *status;
+    int status;
 
     while(1)
     {
@@ -41,24 +43,32 @@ int main(int argc, char* argv[])
         }
         else if(pid)
         {
-            fprintf(f, "Starting another instance at %s\n", buf);
+            fprintf(f, "Starting another instance at %s\n", buffer);
+            fflush(f);
             wait(&status);
 
             time(&rawtime);
             info = localtime(&rawtime);
             strftime(buffer,80,"%c", info);
-            fprintf(f, "Ending last instance at %s with status %d\n", buf, *status);
+            fprintf(f, "Ending last instance at %s with status %d\n", buffer, status);
+            fflush(f);
+            sleep(1);
         }
         else
         {
             char path[100];
             path[0] = 0;
-            strcat(path,"/var/log/");
+            strcat(path,"/var/log/log_robot/");
             strcat(path,buffer);
-            int fd = open(path,O_WRONLY|O_CREAT,0o400);
-            close(stdout);
-            dup2(stdout, fd);
-            execl(argv[1],argv[1],NULL);
+            printf("Redirecting stdout to %s\n",path);
+            int fd = open(path,O_WRONLY|O_CREAT,0400);
+            close(STDOUT_FILENO);
+            dup2(fd,STDOUT_FILENO);
+            if(execl(argv[1],argv[1],NULL)<0)
+            {
+                fprintf(stderr,"Error exec\n");
+                return -1;
+            }
         }
     }
 }
