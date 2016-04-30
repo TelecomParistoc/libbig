@@ -175,7 +175,7 @@ static void turnBack() {
 	actionState = 3;
 	fastSpeedChange(0);
 	setMaxAcceleration(0.1);
-	setTargetHeading(115, turnEnd2);
+	setTargetHeading(125, turnEnd2);
 	//setSideBlockingCallback(turnEnd2);
 }
 static void turnEnd() {
