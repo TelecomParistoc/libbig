@@ -137,7 +137,7 @@ static void stopAndEat() {
 static void turnEnd4() {
 	setActiveDetectors(none);
 	queueSpeedChange(0.1, NULL);
-	queueSpeedChangeAt(40, 0.01, NULL);
+	queueSpeedChangeAt(60, 0.01, NULL);
 	setRobotDistance(0);
 	setSideBlockingCallback(stopAndEat);
 	startEater();
@@ -187,7 +187,7 @@ static void turnEnd() {
 // start collecting cubes : first destroy cube stack
 void startEaterAction() {
 	actionState = 1;
-	scheduleIn(20000, stopEating);
+	scheduleIn(25000, stopEating);
 	setTargetHeading(150, turnEnd);
 	initBrush();
 	setActiveDetectors(rear);
