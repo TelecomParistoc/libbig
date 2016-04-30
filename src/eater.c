@@ -90,6 +90,7 @@ static void robotEmpty() {
 	actionState = 10;
 	stopEater();
 	closeDoor();
+	unsetBrush();
 	setCurrentLocation(1162, 1386);
 	setActiveDetectors(all);
 	actionState = 11;
