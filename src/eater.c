@@ -153,12 +153,14 @@ static void turnEnd3() {
 	setBrush();
 	queueSpeedChange(-0.1, NULL);
 	queueStopAt(-120, backwardFinished);
+
 }
 
 static void backFromCubes(struct motionElement * a) {
 	actionState = 5;
 	if(a) {}
 	setTargetHeading(200, turnEnd3);
+
 }
 static void turnEnd2() {
 	actionState = 4;
@@ -167,11 +169,13 @@ static void turnEnd2() {
 	queueSpeedChange(-0.2, NULL);
 	queueStopAt(-60, backFromCubes);
 	setSideBlockingCallback(NULL);
+	setMaxAcceleration(0.5);
 }
 static void turnBack() {
 	actionState = 3;
 	fastSpeedChange(0);
-	setTargetHeading(110, turnEnd2);
+	setMaxAcceleration(0.1);
+	setTargetHeading(105, turnEnd2);
 	setSideBlockingCallback(turnEnd2);
 }
 static void turnEnd() {
