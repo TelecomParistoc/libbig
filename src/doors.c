@@ -23,7 +23,7 @@ static void actionFinished() {
 static void closeDoor(struct motionElement * a) {
     if(a) {}
     actionState=4;
-    setTargetHeading(210, actionFinished);
+    setTargetHeading(230, actionFinished);
     setSideBlockingCallback(actionFinished);
 }
 static void moveBackward() {
