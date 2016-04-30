@@ -1,4 +1,3 @@
-#include <pathfollower/pathFollower.hpp>
 #include <robotdriver/speedcontroller.h>
 #include <robotdriver/motioncontroller.h>
 #include <robotdriver/toolboxdriver.h>
@@ -15,10 +14,10 @@ bool start = false;
 bool isMovingToAction = false;
 bool started = false;
 bool blocked = false;
+bool pausePath = false;
 bool seeBlocked = false;
 
 int way = 0;
-std::pair<double,double> curPos = std::pair<double,double>(40,1000);
 
 void go()
 {start = true;}
@@ -87,8 +86,12 @@ int main()
                     if(!PathFollower::isPaused())
                     {
                         blocked = true;
+                        pausePath = false;
                         if(isMovingToAction)
+                        {
+                            pausePath = true;
                             PathFollower::pause();
+                        }
                         else
                             actions[way].pauseAction();
                     }
@@ -102,8 +105,12 @@ int main()
                         if(!PathFollower::isPaused())
                         {
                             blocked = true;
+                            pausePath = false;
                             if(isMovingToAction)
+                            {
+                                pausePath = true;
                                 PathFollower::pause();
+                            }
                             else
                                 actions[way].pauseAction();
                         }
@@ -113,7 +120,7 @@ int main()
             if(blocked)
             {
                 blocked = false;
-                if(isMovingToAction)
+                if(pausePath)
                     PathFollower::continueMoving();
                 else
                     actions[way].continueAction();
