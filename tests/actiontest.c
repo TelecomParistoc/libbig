@@ -7,7 +7,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-int started = 0;
+static int started = 0;
 static void arrivedAtDoors() {
     printf("arrived at doors\n");
     startDoorsAction();
@@ -32,6 +32,27 @@ static void onStop() {
     if(getMode() == TEST_MODE)
         exit(0);
 }
+static void checkCollisions() {
+    static int lastStopped = 0;
+    if(getTargetSpeed() >= 0){
+        if(isRobotFront()) {
+            lastStopped = 1;
+            forceStop(1);
+        } else if(lastStopped) {
+            lastStopped = 0;
+            forceStop(0);
+        }
+    }
+    if(getTargetSpeed() <= 0) {
+        if(isRobotBehind()) {
+            lastStopped = 1;
+            forceStop(1);
+        } else if(lastStopped) {
+            lastStopped = 0;
+            forceStop(0);
+        }
+    }
+}
 int main() {
     initRobot();
     setCurrentLocation(129, 1255);
@@ -50,14 +71,17 @@ int main() {
     ffollow("start2cubes", arrivedNearCubes);
     startUmbrellaAction();
     while(!isEaterActionFinished()) {
-        waitFor(100);
+        waitFor(50);
+        checkCollisions();
     }
     printf("finished eater action, going to doors ...\n");
     ffollow("zone2doors", arrivedAtDoors);
     while(!isDoorsActionFinished()) {
-        waitFor(100);
+        waitFor(50);
+        checkCollisions();
     }
     printf("doors closed\n");
+    //ffollow("doors2zone", NULL);
 	while(1);
 	return 0;
 }

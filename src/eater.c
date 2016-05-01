@@ -46,13 +46,13 @@ void initBrush() {
 }
 
 void setBrush() {
-	axMove(AXBRUSH, BRUSHON, setBrushCallback);
+	axMove(AXBRUSH, BRUSHON, setBrushCallback, 0);
 }
 void setBrushMiddle() {
-	axMove(AXBRUSH, BRUSHMIDDLE, brushMiddleCallback);
+	axMove(AXBRUSH, BRUSHMIDDLE, brushMiddleCallback, 0);
 }
 void unsetBrush() {
-	axMove(AXBRUSH, BRUSHOFF, unsetBrushCallback);
+	axMove(AXBRUSH, BRUSHOFF, unsetBrushCallback, 0);
 }
 
 void setSetBrushCallback(void (*callback)(void)){
@@ -66,10 +66,10 @@ void setUnsetBrushCallback(void (*callback)(void)){
 }
 
 void openDoor() {
-	axMove(AXDOOR, AXDOOROPEN, NULL);
+	axMove(AXDOOR, AXDOOROPEN, NULL, 0);
 }
 void closeDoor() {
-	axMove(AXDOOR, AXDOORCLOSED, NULL);
+	axMove(AXDOOR, AXDOORCLOSED, NULL, 0);
 }
 void startEater(){
 	axSetTorqueSpeed(AXCONVEYOR,   -1, CONVEYORSPEED, 1);
@@ -138,10 +138,10 @@ static void stopAndEat() {
 		return;
 	fastSpeedChange(-0.1);
 	setSideBlockingCallback(NULL);
-	scheduleIn(500, moveAndEat);
+	scheduleIn(900, moveAndEat);
 }
 static void sideBlocked() {
-	scheduleIn(1200, stopAndEat);
+	scheduleIn(800, stopAndEat);
 	setSideBlockingCallback(NULL);
 }
 static void turnEnd4() {

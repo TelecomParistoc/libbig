@@ -13,20 +13,20 @@ void initUmbrella(){
 }
 
 void deployUmbrella(){
-	axMove(AXUMBRELLA, UMBRELLAUP, NULL);
+	axMove(AXUMBRELLA, UMBRELLAUP, NULL, 0);
 }
 
 void closeUmbrella(){
-	axMove(AXUMBRELLA, UMBRELLADOWN, NULL);
+	axMove(AXUMBRELLA, UMBRELLADOWN, NULL, 0);
 }
 
 static void onEndOfTheGame() {
 	initUmbrella();
 	deployUmbrella();
+	forceStop(1);
 	printf("umbrella deploying\n");
 }
 void startUmbrellaAction() {
 	scheduleIn(90000, onEndOfTheGame);
 	printf("umbrella scheduled\n");
 }
-
