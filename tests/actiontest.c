@@ -24,9 +24,9 @@ static void quitAndRestart() {
 }
 static void onStop() {
     if(started == 2) {
-        setLED(1, 1);
-        setLED(2, 1);
-        scheduleIn(50, quitAndRestart);    
+        setLED(1, 0);
+        setLED(2, 0);
+        scheduleIn(50, quitAndRestart);
     }
 	started = 1;
     if(getMode() == TEST_MODE)
