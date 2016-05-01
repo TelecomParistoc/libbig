@@ -20,8 +20,11 @@ static void onStart() {
 		started = 2;
 }
 static void onStop() {
-    if(started == 2)
+    if(started == 2) {
+        setLED(1, 0);
+        setLED(2, 0);
         exit(-23);
+    }
 	started = 1;
     if(getMode() == TEST_MODE)
         exit(0);
@@ -31,8 +34,17 @@ int main() {
     setCurrentLocation(129, 1255);
     onGameStop(onStop);
     onGameStart(onStart);
+
+    while(started != 1) {
+        waitFor(200);
+        setLED(1, 1);
+        waitFor(200);
+        setLED(1, 0);
+    }
+    setLED(1, 1);
     while(started != 2)
-	waitFor(100);
+        waitFor(200);
+    setLED(2, 1);
     ffollow("start2cubes", arrivedNearCubes);
     startUmbrellaAction();
     while(!isEaterActionFinished()) {
