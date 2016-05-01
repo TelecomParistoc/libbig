@@ -37,7 +37,7 @@ static void moveBackward() {
     actionState=5;
     setRobotDistance(0);
     queueSpeedChange(-0.2, NULL);
-    queueStopAt(-160, closeDoor);
+    queueStopAt(-160, turnToDoor);
 }
 static void turnEnd() {
     if(actionState >= 4)
