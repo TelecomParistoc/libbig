@@ -28,6 +28,7 @@ static void onStop() {
     if(started == 2) {
         setLED(1, 0);
         setLED(2, 0);
+        setLED(3, 0);
         scheduleIn(50, quitAndRestart);
     }
 	started = 1;
@@ -58,6 +59,9 @@ static void checkCollisions() {
             setLED(3, 0);
         }
     }
+}
+static void enableAllSensors() {
+    setActiveDetectors(all);
 }
 int main() {
     initRobot();
@@ -92,6 +96,8 @@ int main() {
         checkCollisions();
     }
     printf("doors closed\n");
+    setActiveDetectors(front);
+    scheduleIn(4000, enableAllSensors);
     ffollow("doors2zone", NULL);
 	while(1);
 	return 0;

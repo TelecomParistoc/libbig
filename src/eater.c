@@ -153,7 +153,7 @@ static void turnEnd4() {
 	queueSpeedChange(0.1, NULL);
 	queueSpeedChangeAt(65, 0.01, NULL);
 	setRobotDistance(0);
-	setSideBlockingCallback(sideBlocked);
+	scheduleIn(3000, sideBlocked);
 	startEater();
 }
 static void backwardFinished(struct motionElement * a) {
