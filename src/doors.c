@@ -16,21 +16,28 @@ int isDoorsActionFinished() {
 static void actionFinished() {
     if(actionState >= 7)
         return;
+    fastSpeedChange(0);
     setSideBlockingCallback(NULL);
-    setCurrentLocation(612, 1781);
+    setCurrentLocation(562, 1781);
+    setActiveDetectors(all);
     actionState = 7;
 }
-static void closeDoor(struct motionElement * a) {
+static void closeDoor() {
+    queueSpeedChange(-0.1, NULL);
+    setSideBlockingCallback(actionFinished);
+}
+static void turnToDoor(struct motionElement * a) {
     if(a) {}
     actionState=6;
-    setTargetHeading(230, actionFinished);
-    setSideBlockingCallback(actionFinished);
+    setActiveDetectors(none);
+    setTargetHeading(270, closeDoor);
+    setSideBlockingCallback(closeDoor);
 }
 static void moveBackward() {
     actionState=5;
     setRobotDistance(0);
     queueSpeedChange(-0.2, NULL);
-    queueStopAt(-220, closeDoor);
+    queueStopAt(-160, closeDoor);
 }
 static void turnEnd() {
     if(actionState >= 4)
