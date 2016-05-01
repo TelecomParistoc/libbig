@@ -18,7 +18,7 @@ static void actionFinished() {
         return;
     fastSpeedChange(0);
     setSideBlockingCallback(NULL);
-    setCurrentLocation(562, 1781);
+    setCurrentLocation(502, 1781);
     setActiveDetectors(all);
     actionState = 7;
 }
@@ -37,7 +37,7 @@ static void moveBackward() {
     actionState=5;
     setRobotDistance(0);
     queueSpeedChange(-0.2, NULL);
-    queueStopAt(-160, turnToDoor);
+    queueStopAt(-100, turnToDoor);
 }
 static void turnEnd() {
     if(actionState >= 4)

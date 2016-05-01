@@ -141,7 +141,7 @@ static void stopAndEat() {
 	scheduleIn(500, moveAndEat);
 }
 static void sideBlocked() {
-	scheduleIn(800, stopAndEat);
+	scheduleIn(1200, stopAndEat);
 	setSideBlockingCallback(NULL);
 }
 static void turnEnd4() {
