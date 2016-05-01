@@ -17,7 +17,7 @@ static void actionFinished() {
     if(actionState >= 7)
         return;
     setSideBlockingCallback(NULL);
-    setCurrentLocation(602, 1781);
+    setCurrentLocation(612, 1781);
     actionState = 7;
 }
 static void closeDoor(struct motionElement * a) {
@@ -30,7 +30,7 @@ static void moveBackward() {
     actionState=5;
     setRobotDistance(0);
     queueSpeedChange(-0.2, NULL);
-    queueStopAt(-210, closeDoor);
+    queueStopAt(-220, closeDoor);
 }
 static void turnEnd() {
     if(actionState >= 4)

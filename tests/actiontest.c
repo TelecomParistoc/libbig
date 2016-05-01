@@ -20,7 +20,11 @@ static void onStart() {
 		started = 2;
 }
 static void onStop() {
+    if(started == 2)
+        exit(-23);
 	started = 1;
+    if(getMode() == TEST_MODE)
+        exit(0);
 }
 int main() {
     initRobot();
