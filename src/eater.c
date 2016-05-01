@@ -98,6 +98,7 @@ static void robotEmpty() {
 static void unloadCubes() {
 	fastSpeedChange(0);
 	setBlockingCallback(NULL);
+	setRobotHeading(90);
 	enableHeadingControl(1);
 	startEater();
 	openDoor();
@@ -135,9 +136,9 @@ static void moveAndEat() {
 static void stopAndEat() {
 	if(actionState > 7)
 		return;
-	fastSpeedChange(-0.02);
+	fastSpeedChange(-0.1);
 	setSideBlockingCallback(NULL);
-	scheduleIn(800, moveAndEat);
+	scheduleIn(500, moveAndEat);
 }
 static void sideBlocked() {
 	scheduleIn(800, stopAndEat);
