@@ -21,8 +21,8 @@ static void onStart() {
 }
 static void onStop() {
     if(started == 2) {
-        setLED(1, 0);
-        setLED(2, 0);
+        setLED(1, 1);
+        setLED(2, 1);
         exit(-23);
     }
 	started = 1;
@@ -41,10 +41,10 @@ int main() {
         waitFor(200);
         setLED(1, 0);
     }
-    setLED(1, 1);
+    setLED(1, 0);
     while(started != 2)
         waitFor(200);
-    setLED(2, 1);
+    setLED(2, 0);
     ffollow("start2cubes", arrivedNearCubes);
     startUmbrellaAction();
     while(!isEaterActionFinished()) {
