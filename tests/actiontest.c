@@ -19,11 +19,14 @@ static void onStart() {
 	if(started == 1)
 		started = 2;
 }
+static void quitAndRestart() {
+    exit(-23);
+}
 static void onStop() {
     if(started == 2) {
         setLED(1, 1);
         setLED(2, 1);
-        exit(-23);
+        scheduleIn(50, quitAndRestart);    
     }
 	started = 1;
     if(getMode() == TEST_MODE)
@@ -37,14 +40,13 @@ int main() {
 
     while(started != 1) {
         waitFor(200);
-        setLED(1, 1);
-        waitFor(200);
         setLED(1, 0);
+        waitFor(200);
+        setLED(1, 1);
     }
-    setLED(1, 0);
     while(started != 2)
         waitFor(200);
-    setLED(2, 0);
+    setLED(2, 1);
     ffollow("start2cubes", arrivedNearCubes);
     startUmbrellaAction();
     while(!isEaterActionFinished()) {
