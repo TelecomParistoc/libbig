@@ -1,4 +1,5 @@
 #include <robotdriver/toolboxdriver.h>
+#include <robotdriver/motioncontroller.h>
 #include <stdlib.h>
 #include "umbrella.h"
 #include <stdio.h>

@@ -4,6 +4,7 @@
 #include <librobot/umbrella.h>
 #include <pathfollower/pathfollower.h>
 #include <robotdriver/toolboxdriver.h>
+#include <robotdriver/motioncontroller.h>
 #include <stdlib.h>
 #include <stdio.h>
 
