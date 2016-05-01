@@ -49,9 +49,11 @@ static void checkCollisions() {
         if(isRobotBehind()) {
             lastStopped = 1;
             forceStop(1);
+            setLED(3, 1);
         } else if(lastStopped) {
             lastStopped = 0;
             forceStop(0);
+            setLED(3, 0);
         }
     }
 }
