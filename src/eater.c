@@ -131,6 +131,7 @@ static void moveAndEat() {
 		return;
 	fastSpeedChange(0.01);
 	setSideBlockingCallback(sideBlocked);
+	printf("move\n");
 }
 
 static void stopAndEat() {
@@ -139,10 +140,13 @@ static void stopAndEat() {
 	fastSpeedChange(-0.1);
 	setSideBlockingCallback(NULL);
 	scheduleIn(900, moveAndEat);
+	printf("back\n");
 }
 static void sideBlocked() {
 	scheduleIn(800, stopAndEat);
 	setSideBlockingCallback(NULL);
+	fastSpeedChange(0);
+	printf("stop\n");
 }
 static void turnEnd4() {
 	setActiveDetectors(none);
