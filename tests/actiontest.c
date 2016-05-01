@@ -5,6 +5,7 @@
 #include <pathfollower/pathfollower.h>
 #include <robotdriver/toolboxdriver.h>
 #include <robotdriver/motioncontroller.h>
+#include <robotdriver/speedcontroller.h>
 #include <stdlib.h>
 #include <stdio.h>
 
