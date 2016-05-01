@@ -18,7 +18,7 @@ static void actionFinished() {
         return;
     fastSpeedChange(0);
     setSideBlockingCallback(NULL);
-    setCurrentLocation(502, 1781);
+    setCurrentLocation(510, 1859);
     setActiveDetectors(all);
     actionState = 7;
 }

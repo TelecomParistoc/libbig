@@ -40,9 +40,11 @@ static void checkCollisions() {
         if(isRobotFront()) {
             lastStopped = 1;
             forceStop(1);
+            setLED(3, 1);
         } else if(lastStopped) {
             lastStopped = 0;
             forceStop(0);
+            setLED(3, 0);
         }
     }
     if(getTargetSpeed() <= 0) {
@@ -72,6 +74,11 @@ int main() {
     while(started != 2)
         waitFor(200);
     setLED(2, 1);
+
+    if(getTeam() == GREEN_TEAM)
+        setActiveDetectors(right);
+    else
+        setActiveDetectors(left);
     ffollow("start2cubes", arrivedNearCubes);
     startUmbrellaAction();
     while(!isEaterActionFinished()) {
@@ -85,7 +92,7 @@ int main() {
         checkCollisions();
     }
     printf("doors closed\n");
-    //ffollow("doors2zone", NULL);
+    ffollow("doors2zone", NULL);
 	while(1);
 	return 0;
 }
