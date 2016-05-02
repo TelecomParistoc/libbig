@@ -118,6 +118,7 @@ static void nearZone(struct motionElement * a) {
 }
 static void stopEating() {
 	actionState = 8;
+	enableHeadingControl(1);
 	setActiveDetectors(rear);
 	stopEater();
 	queueSpeedChange(-0.2, NULL);
@@ -145,6 +146,7 @@ static void turnEnd4() {
 	queueSpeedChange(0.1, NULL);
 	queueSpeedChangeAt(65, 0.01, NULL);
 	setRobotDistance(0);
+	enableHeadingControl(0);
 	scheduleIn(200, speedManager);
 	startEater();
 }
