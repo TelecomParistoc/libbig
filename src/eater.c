@@ -86,14 +86,20 @@ void stopEater(){
 // ############## action moves : ##############
 static int actionState = 0;
 
+static void cornerFromCenter();
 static void robotEmpty() {
-	actionState = 10;
+	//actionState = 10;
 	stopEater();
 	closeDoor();
 	unsetBrush();
-	setCurrentLocation(1180, 1386);
 	setActiveDetectors(all);
-	actionState = 11;
+	if(actionState == 8) {
+		setCurrentLocation(1180, 1386);
+		actionState = 11;
+	} else {
+		setCurrentLocation(1300, 1386);
+		ffollow("zone2cubes", cornerFromCenter);
+	}
 }
 static void unloadCubes() {
 	fastSpeedChange(0);
@@ -111,7 +117,7 @@ static void turnEnd5() {
 	setBlockingCallback(unloadCubes);
 }
 static void nearZone(struct motionElement * a) {
-	actionState = 9;
+	//actionState = 9;
 	if(a) {}
 	printf("finished eating\n");
 	setTargetHeading(90,turnEnd5);
@@ -134,7 +140,7 @@ static void speedManager() {
 	double differenceL = lastDistanceL == -20000 ? 0 : getLdistance()-lastDistanceL;
 	lastDistanceL = getLdistance();
 	lastDistanceR = getRdistance();
-	if(differenceL <= 0.4 || differenceR <= 0.4) {
+	if(differenceL <= 0.8 || differenceR <= 0.8) {
 		fastSpeedChange(-0.01);
 	} else {
 		fastSpeedChange(0.01);
@@ -193,12 +199,65 @@ static void turnEnd() {
 	setSideBlockingCallback(turnBack);
 }
 // start collecting cubes : first destroy cube stack
-void startEaterAction() {
+static void eatCorner(struct motionElement * a) {
 	actionState = 1;
+	if(a) {}
 	scheduleIn(30000, stopEating);
 	setTargetHeading(150, turnEnd);
 	initBrush();
 	setActiveDetectors(rear);
+}
+
+static void cornerFromCenter() {
+	eatCorner(NULL);
+}
+static void stopEatingCenter() {
+	actionState = 18;
+	enableHeadingControl(1);
+	setActiveDetectors(rear);
+	stopEater();
+	queueSpeedChange(-0.2, NULL);
+	queueStopAt(-190, nearZone);
+	setSideBlockingCallback(NULL);
+}
+static void turnEnd01() {
+	queueSpeedChange(0.2, NULL);
+	queueSpeedChangeAt(50, 0.01, NULL);
+	setRobotDistance(0);
+	enableHeadingControl(0);
+	scheduleIn(200, speedManager);
+	startEater();
+}
+static void moveToCenter(struct motionElement * a) {
+	if(a) {}
+	scheduleIn(10000, stopEatingCenter);
+	setActiveDetectors(none);
+	setBrush();
+	setTargetHeading(73, turnEnd01);
+}
+static void checkFreeWay() {
+	if(isRobotFront()) {
+		clearMotionQueue();
+		queueSpeedChange(-0.3, NULL);
+		queueStopAt(0, eatCorner);
+	} else
+		scheduleIn(50, checkFreeWay);
+}
+static void turnEnd0() {
+	scheduleIn(50, checkFreeWay);
+	setRobotDistance(0);
+	queueSpeedChange(0.3, NULL);
+	queueStopAt(388, moveToCenter);
+}
+void startEaterAction() {
+	actionState = 0;
+	if(getStrategy() == 1) {
+		eatCorner(NULL);
+	} else {
+		setTargetHeading(180, turnEnd0);
+		initBrush();
+		setActiveDetectors(front);
+	}
 }
 
 void pauseEaterAction() {
