@@ -91,7 +91,7 @@ static void robotEmpty() {
 	stopEater();
 	closeDoor();
 	unsetBrush();
-	setCurrentLocation(1189, 1386);
+	setCurrentLocation(1180, 1386);
 	setActiveDetectors(all);
 	actionState = 11;
 }
@@ -121,7 +121,7 @@ static void stopEating() {
 	setActiveDetectors(rear);
 	stopEater();
 	queueSpeedChange(-0.2, NULL);
-	queueStopAt(-230, nearZone);
+	queueStopAt(-210, nearZone);
 	setSideBlockingCallback(NULL);
 }
 static void speedManager() {
