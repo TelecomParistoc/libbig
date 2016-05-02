@@ -10,13 +10,14 @@
 #include <stdio.h>
 
 static int started = 0;
+/*
 static void arrivedAtDoors() {
     printf("arrived at doors\n");
     startDoorsAction();
 }
 static void arrivedNearCubes() {
     startEaterAction();
-}
+}*/
 static void onStart() {
 	if(started == 1)
 		started = 2;
@@ -64,9 +65,10 @@ static void enableAllSensors() {
 	setActiveDetectors(all);
     printf("sensors activated\n");
 }
+/*
 static void enableRearSensors() {
 	setActiveDetectors(rear);
-}
+}*/
 
 int main() {
     initRobot();
@@ -109,6 +111,9 @@ int main() {
     setActiveDetectors(none);
     scheduleIn(4000, enableAllSensors);
     ffollow("doors2zone", NULL);
-    while(1);
+    while(1) {
+        waitFor(50);
+    	checkCollisions();
+    }
     return 0;
 }
