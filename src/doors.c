@@ -12,16 +12,15 @@
 static int actionState = 0;
 
 int isDoorsActionFinished() {
-    return actionState == 7;
+    return actionState == 4;
 }
 static void actionFinished() {
-    if(actionState >= 7)
+    if(actionState >= 4)
         return;
     fastSpeedChange(0);
     setSideBlockingCallback(NULL);
     setCurrentLocation(450, 1859);
-    //setActiveDetectors(all);
-    actionState = 7;
+    actionState = 4;
 }
 static void closeDoor() {
     queueSpeedChange(-0.1, NULL);
@@ -30,30 +29,11 @@ static void closeDoor() {
 }
 static void turnToDoor(struct motionElement * a) {
     if(a) {}
-    actionState=6;
+    actionState=3;
     setActiveDetectors(none);
     setTargetHeading(270, closeDoor);
     setSideBlockingCallback(closeDoor);
-}/*
-static void moveBackward() {
-    actionState=5;
-    setRobotDistance(0);
-    queueSpeedChange(-0.2, NULL);
-    queueStopAt(-40, turnToDoor);
 }
-static void turnEnd() {
-    if(actionState >= 4)
-        return;
-    actionState=4;
-    setSideBlockingCallback(NULL);
-    setTargetHeading(180, moveBackward);
-}
-static void closeFirstDoor(struct motionElement * a) {
-    actionState = 3;
-    if(a) {}
-    setTargetHeading(154, turnEnd);
-    setSideBlockingCallback(turnEnd);
-}*/
 static void recalibrationEnd() {
     actionState = 2;
     enableHeadingControl(1);
@@ -70,22 +50,10 @@ void resumeDoorsAction() {
         case 1:
             startDoorsAction();
             break;
-       /* case 2:
-	    queueSpeedChange(-0.3, NULL);
-   	    queueStopAt(-230, closeFirstDoor);
-	    break;
-	case 3:
-	    closeFirstDoor(NULL);
-	case 4:
-            turnEnd();
-            break;
-        case 5:
-            queueSpeedChange(-0.2, NULL);
-            queueStopAt(-190, closeDoor);
-            break;
-        case 6:
-            closeDoor(NULL);
-            break;*/
+        case 2:
+    	    queueSpeedChange(-0.3, NULL);
+       	    queueStopAt(-260, turnToDoor);
+    	    break;
     }
 }
 void pauseDoorsAction() {

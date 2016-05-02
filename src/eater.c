@@ -124,36 +124,28 @@ static void stopEating() {
 	queueStopAt(-230, nearZone);
 	setSideBlockingCallback(NULL);
 }
-
-static void sideBlocked();
-static void moveAndEat() {
-	if(actionState > 7)
+static void speedManager() {
+	if(actionState >= 7)
 		return;
-	fastSpeedChange(0.01);
-	setSideBlockingCallback(sideBlocked);
-	printf("move\n");
-}
-
-static void stopAndEat() {
-	if(actionState > 7)
-		return;
-	fastSpeedChange(-0.1);
-	setSideBlockingCallback(NULL);
-	scheduleIn(200, moveAndEat);
-	printf("back\n");
-}
-static void sideBlocked() {
-	scheduleIn(800, stopAndEat);
-	setSideBlockingCallback(NULL);
-	fastSpeedChange(0);
-	printf("stop\n");
+	static double lastDistanceR = -20000;
+	static double lastDistanceL = -20000;
+	double differenceR = lastDistanceR == -20000 ? 0 : getRdistance()-lastDistanceR;
+	double differenceL = lastDistanceL == -20000 ? 0 : getLdistance()-lastDistanceL;
+	lastDistanceL = getLdistance();
+	lastDistanceR = getRdistance();
+	if(differenceL <= 0.4 || differenceR <= 0.4) {
+		fastSpeedChange(-0.01);
+	} else {
+		fastSpeedChange(0.01);
+	}
+	scheduleIn(200, speedManager);
 }
 static void turnEnd4() {
 	setActiveDetectors(none);
 	queueSpeedChange(0.1, NULL);
 	queueSpeedChangeAt(65, 0.01, NULL);
 	setRobotDistance(0);
-	scheduleIn(6000, sideBlocked);
+	scheduleIn(200, speedManager);
 	startEater();
 }
 static void backwardFinished(struct motionElement * a) {
