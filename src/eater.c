@@ -108,7 +108,10 @@ static void unloadCubes() {
 	enableHeadingControl(1);
 	startEater();
 	openDoor();
-	scheduleIn(8000, robotEmpty);
+	if(actionState == 8)
+		scheduleIn(7000, robotEmpty);
+	else
+		scheduleIn(3000, robotEmpty);
 }
 static void turnEnd5() {
 	setActiveDetectors(none);
@@ -215,7 +218,7 @@ static void turnEnd() {
 static void eatCorner(struct motionElement * a) {
 	actionState = 1;
 	if(a) {}
-	scheduleIn(26000, stopEating);
+	scheduleIn(24000, stopEating);
 	setTargetHeading(150, turnEnd);
 	initBrush();
 	setActiveDetectors(rear);
@@ -235,7 +238,7 @@ static void stopEatingCenter() {
 }
 static void turnEnd01() {
 	queueSpeedChange(0.2, NULL);
-	queueSpeedChangeAt(50, 0.01, NULL);
+	queueSpeedChangeAt(60, 0.01, NULL);
 	setRobotDistance(0);
 	enableHeadingControl(0);
 	scheduleIn(1200, speedManager);
@@ -243,7 +246,7 @@ static void turnEnd01() {
 }
 static void moveToCenter(struct motionElement * a) {
 	if(a) {}
-	scheduleIn(10000, stopEatingCenter);
+	scheduleIn(8000, stopEatingCenter);
 	setActiveDetectors(none);
 	setBrush();
 	setTargetHeading(73, turnEnd01);
