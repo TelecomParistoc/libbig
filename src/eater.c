@@ -131,21 +131,29 @@ static void stopEating() {
 	queueStopAt(-210, nearZone);
 	setSideBlockingCallback(NULL);
 }
+
+static double lastDistanceR = -20000;
+static double lastDistanceL = -20000;
+
+static void goForwardToCubes() {
+	fastSpeedChange(0.01);
+	scheduleIn(200, speedManager);
+}
 static void speedManager() {
-	if(actionState >= 7)
+	if(actionState >= 7 || lastDistanceR == -20000)
 		return;
-	static double lastDistanceR = -20000;
-	static double lastDistanceL = -20000;
-	double differenceR = lastDistanceR == -20000 ? 0 : getRdistance()-lastDistanceR;
-	double differenceL = lastDistanceL == -20000 ? 0 : getLdistance()-lastDistanceL;
+	double differenceR = getRdistance()-lastDistanceR;
+	double differenceL = getLdistance()-lastDistanceL;
 	lastDistanceL = getLdistance();
 	lastDistanceR = getRdistance();
 	differenceR = differenceR > 0 ? differenceR : 0;
 	differenceL = differenceL > 0 ? differenceL : 0;
-	if(differenceL <= 0.4 || differenceR <= 0.4) {
+	if((differenceL <= 0.4 || differenceR <= 0.4) && getTargetSpeed() == 0.01) {
 		fastSpeedChange(-0.01);
+		scheduleIn(300, goForwardToCubes);
 	} else {
 		fastSpeedChange(0.01);
+		scheduleIn(200, speedManager);
 	}
 	scheduleIn(200, speedManager);
 }
@@ -155,7 +163,9 @@ static void turnEnd4() {
 	queueSpeedChangeAt(65, 0.01, NULL);
 	setRobotDistance(0);
 	enableHeadingControl(0);
-	scheduleIn(200, speedManager);
+	scheduleIn(1000, speedManager);
+	lastDistanceR = -20000;
+	lastDistanceL = -20000;
 	startEater();
 }
 static void backwardFinished(struct motionElement * a) {
