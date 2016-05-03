@@ -254,7 +254,7 @@ void startEaterAction() {
 	if(getStrategy() == 1) {
 		eatCorner(NULL);
 	} else {
-		setTargetHeading(180, turnEnd0);
+		setTargetHeading(0, turnEnd0);
 		initBrush();
 		setActiveDetectors(front);
 	}
