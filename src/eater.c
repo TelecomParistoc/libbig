@@ -246,6 +246,7 @@ static void turnEnd01() {
 	startEater();
 }
 static void moveToCenter(struct motionElement * a) {
+	actionState = 17;
 	if(a) {}
 	scheduleIn(8000, stopEatingCenter);
 	setActiveDetectors(none);
@@ -257,7 +258,7 @@ static void checkFreeWay() {
 		clearMotionQueue();
 		queueSpeedChange(-0.3, NULL);
 		queueStopAt(0, eatCorner);
-	} else{
+	} else if(actionState >= 17) {
 		scheduleIn(50, checkFreeWay);
 		setActiveDetectors(all);
 	}
