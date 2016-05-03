@@ -93,6 +93,7 @@ static void robotEmpty() {
 	closeDoor();
 	unsetBrush();
 	setActiveDetectors(all);
+	setSideBlockingCallback(NULL);
 	if(actionState == 8) {
 		setCurrentLocation(1180, 1386);
 		actionState = 11;
@@ -256,8 +257,10 @@ static void checkFreeWay() {
 		clearMotionQueue();
 		queueSpeedChange(-0.3, NULL);
 		queueStopAt(0, eatCorner);
-	} else
+	} else{
 		scheduleIn(50, checkFreeWay);
+		setActiveDetectors(all);
+	}
 }
 static void turnEnd0() {
 	scheduleIn(50, checkFreeWay);

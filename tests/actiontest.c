@@ -95,7 +95,7 @@ int main() {
     enableHeadingControl(1);
     setActiveDetectors(all);
 
-    scheduleIn(5000, enableRearSensors);
+    scheduleIn(2000, enableRearSensors);
     ffollow("start2cubes", arrivedNearCubes);
     startUmbrellaAction();
     while(!isEaterActionFinished()) {
@@ -115,7 +115,7 @@ int main() {
     }
     printf("doors closed\n");
     setActiveDetectors(none);
-    scheduleIn(4000, enableAllSensors);
+    scheduleIn(2000, enableAllSensors);
     ffollow("doors2zone", NULL);
     while(1) {
         waitFor(50);
