@@ -135,6 +135,7 @@ static void stopEating() {
 static double lastDistanceR = -20000;
 static double lastDistanceL = -20000;
 
+static void speedManager();
 static void goForwardToCubes() {
 	fastSpeedChange(0.01);
 	scheduleIn(200, speedManager);
