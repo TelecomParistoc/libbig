@@ -6,6 +6,7 @@
 #include <robotdriver/toolboxdriver.h>
 #include <robotdriver/motioncontroller.h>
 #include <robotdriver/speedcontroller.h>
+#include <robotdriver/headingcontroller.h>
 #include <robotdriver/motordriver.h>
 #include <stdlib.h>
 #include <stdio.h>
