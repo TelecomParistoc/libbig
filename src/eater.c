@@ -140,6 +140,8 @@ static void speedManager() {
 	double differenceL = lastDistanceL == -20000 ? 0 : getLdistance()-lastDistanceL;
 	lastDistanceL = getLdistance();
 	lastDistanceR = getRdistance();
+	differenceR = differenceR > 0 ? differenceR : 0;
+	differenceL = differenceL > 0 ? differenceL : 0;
 	if(differenceL <= 0.8 || differenceR <= 0.8) {
 		fastSpeedChange(-0.01);
 	} else {
@@ -225,12 +227,12 @@ static void turnEnd01() {
 	queueSpeedChangeAt(50, 0.01, NULL);
 	setRobotDistance(0);
 	enableHeadingControl(0);
-	scheduleIn(200, speedManager);
+	scheduleIn(600, speedManager);
 	startEater();
 }
 static void moveToCenter(struct motionElement * a) {
 	if(a) {}
-	scheduleIn(10000, stopEatingCenter);
+	scheduleIn(15000, stopEatingCenter);
 	setActiveDetectors(none);
 	setBrush();
 	setTargetHeading(73, turnEnd01);
