@@ -294,7 +294,7 @@ void pauseEaterAction() {
     queueSpeedChange(0, NULL);
 }
 void resumeEaterAction() {
-	switch (actionState) {
+	/*switch (actionState) {
 		case 1:
 			setTargetHeading(150, turnEnd);
 			break;
@@ -324,7 +324,7 @@ void resumeEaterAction() {
 		case 9:
 			nearZone(NULL);
 			break;
-	}
+	}*/
 }
 int isEaterActionFinished() {
 	return actionState == 11;
