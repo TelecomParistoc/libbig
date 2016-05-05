@@ -213,7 +213,7 @@ static void backwardAbit() {
 	clearMotionQueue();
 	setRobotDistance(0);
 	queueSpeedChange(-0.1, NULL);
-	queueStopAt(-10, turnBack);
+	queueStopAt(-20, turnBack);
 }
 static void turnEnd() {
 	actionState = 2;
