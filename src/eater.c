@@ -212,8 +212,8 @@ static void backwardAbit() {
 	setSideBlockingCallback(NULL);
 	clearMotionQueue();
 	setRobotDistance(0);
-	queueSpeedChange(-0.1, NULL);
-	queueStopAt(-20, turnBack);
+	queueSpeedChange(-0.05, NULL);
+	queueStopAt(-5, turnBack);
 }
 static void turnEnd() {
 	actionState = 2;

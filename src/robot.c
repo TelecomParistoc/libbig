@@ -67,7 +67,8 @@ void initRobot() {
 	setCollisionsCallback(collisionsCallback);
 	initUmbrella();
 	initBrush();
-
+    forceStop(0);
+    
 	lastJack = getSensor(1);
 }
 
