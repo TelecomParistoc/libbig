@@ -13,7 +13,7 @@
 // middle : rayon 235.5mm
 #define AXBRUSH 133
 #define BRUSHSPEED 500
-#define BRUSHON 812
+#define BRUSHON 780
 #define BRUSHOFF 280
 #define BRUSHMIDDLE 280
 
@@ -150,7 +150,7 @@ static void speedManager() {
 	lastDistanceR = getRdistance();
 	differenceR = differenceR > 0 ? differenceR : 0;
 	differenceL = differenceL > 0 ? differenceL : 0;
-	if((differenceL <= 0.4 || differenceR <= 0.4) && getTargetSpeed() == 0.01) {
+	if((differenceL <= 0.8 || differenceR <= 0.8) && getTargetSpeed() == 0.01) {
 		fastSpeedChange(-0.01);
 		scheduleIn(200, goForwardToCubes);
 	} else {
@@ -159,12 +159,14 @@ static void speedManager() {
 	}
 	scheduleIn(200, speedManager);
 }
+static void fillWithCubes() {
+	enableHeadingControl(0);
+}
 static void turnEnd4() {
 	setActiveDetectors(none);
 	queueSpeedChange(0.1, NULL);
 	queueSpeedChangeAt(65, 0.01, NULL);
 	setRobotDistance(0);
-	enableHeadingControl(0);
 	scheduleIn(1000, speedManager);
 	lastDistanceR = -20000;
 	lastDistanceL = -20000;
@@ -223,6 +225,7 @@ static void eatCorner(struct motionElement * a) {
 	actionState = 1;
 	if(a) {}
 	scheduleIn(24000, stopEating);
+	scheduleIn(21000, fillWithCubes);
 	setTargetHeading(150, turnEnd);
 	initBrush();
 	setActiveDetectors(rear);

@@ -91,6 +91,7 @@ int main() {
     	waitFor(200);
     	setLED(1, 1);
     }
+    axReset();
     while(started != 2)
     	waitFor(200);
 
@@ -123,7 +124,8 @@ int main() {
 
     // seashells
     setActiveDetectors(none);
-    scheduleIn(2000, enableAllSensors);
+    forceStop(0);
+    scheduleIn(1000, enableAllSensors);
     ffollow("doors2zone", NULL);
     while(1) {
         waitFor(50);
