@@ -67,11 +67,15 @@ static void enableAllSensors() {
 	setActiveDetectors(all);
     printf("sensors activated\n");
 }
-static void enableRearSensors() {
-	setActiveDetectors(rear);
+static void enableSideSensors() {
+    if(getTeam() == GREEN_TEAM)
+        setActiveDetectors(right);
+    else
+        setActiveDetectors(left);
 }
 
 int main() {
+    // init
     initRobot();
     enableHeadingControl(0);
     setCurrentLocation(129, 1255);
@@ -79,6 +83,8 @@ int main() {
     onGameStart(onStart);
     setLED(3, 0);
     setLED(2, 0);
+
+    // wait for start
     while(started != 1) {
     	waitFor(200);
     	setLED(1, 0);
@@ -87,6 +93,8 @@ int main() {
     }
     while(started != 2)
     	waitFor(200);
+
+    // start
     setLED(2, 1);
     setLED(1, 0);
     setRobotHeading(0);
@@ -95,7 +103,7 @@ int main() {
     enableHeadingControl(1);
     setActiveDetectors(all);
 
-    //scheduleIn(2000, enableRearSensors);
+    //cubes
     ffollow("start2cubes", arrivedNearCubes);
     startUmbrellaAction();
     while(!isEaterActionFinished()) {
@@ -103,17 +111,17 @@ int main() {
     	checkCollisions();
     }
     printf("finished eater action, going to doors ...\n");
-    if(getTeam() == GREEN_TEAM)
-    	setActiveDetectors(right);
-	else
-    	setActiveDetectors(left);
 
+    // doors
+    enableSideSensors();
 	ffollow("zone2doors", arrivedAtDoors);
     while(!isDoorsActionFinished()) {
     	waitFor(50);
     	checkCollisions();
     }
     printf("doors closed\n");
+
+    // seashells
     setActiveDetectors(none);
     scheduleIn(2000, enableAllSensors);
     ffollow("doors2zone", NULL);

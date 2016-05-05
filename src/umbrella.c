@@ -25,6 +25,7 @@ static void onEndOfTheGame() {
 	initUmbrella();
 	deployUmbrella();
 	forceStop(1);
+	axReset();
 	printf("umbrella deploying\n");
 }
 void startUmbrellaAction() {
