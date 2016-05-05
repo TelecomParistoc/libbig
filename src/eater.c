@@ -15,7 +15,7 @@
 #define BRUSHSPEED 500
 #define BRUSHON 812
 #define BRUSHOFF 280
-#define BRUSHMIDDLE 720
+#define BRUSHMIDDLE 680
 
 #define AXDOOR 141
 #define DOORSPEED 400
@@ -23,14 +23,10 @@
 #define AXDOOROPEN 248
 
 // Ax-12 that controls the conveyor belt
-//TODO Check rotation direction
-
 #define AXCONVEYOR    135
 #define CONVEYORSPEED (-1023)
 
 // Ax-12 that control the brushes
-// TODO Check rotation direction
-
 #define AXLEFTBRUSH  143
 #define AXRIGHTBRUSH 142
 #define AXLEFTSPEED  1023
@@ -66,6 +62,7 @@ void setUnsetBrushCallback(void (*callback)(void)){
 }
 
 void openDoor() {
+	axSetTorqueSpeed(AXDOOR, -1, DOORSPEED, 0);
 	axMove(AXDOOR, AXDOOROPEN, NULL, 0);
 }
 void closeDoor() {
@@ -183,7 +180,7 @@ static void turnEnd3() {
 	setRobotDistance(0);
 	setBrush();
 	queueSpeedChange(-0.1, NULL);
-	queueStopAt(-120, backwardFinished);
+	queueStopAt(-117, backwardFinished);
 
 }
 
@@ -194,26 +191,35 @@ static void backFromCubes(struct motionElement * a) {
 
 }
 static void turnEnd2() {
+	if(actionState >= 4)
+		return;
 	actionState = 4;
 	setRobotDistance(0);
 	fastSpeedChange(0);
 	queueSpeedChange(-0.2, NULL);
-	queueStopAt(-60, backFromCubes);
+	queueStopAt(-57, backFromCubes);
 	setSideBlockingCallback(NULL);
 	setMaxAcceleration(0.5);
 }
-static void turnBack() {
+static void turnBack(struct motionElement * a) {
+	if(a) {}
 	actionState = 3;
-	fastSpeedChange(0);
 	setMaxAcceleration(0.1);
 	setTargetHeading(120, turnEnd2);
-	//setSideBlockingCallback(turnEnd2);
+	setSideBlockingCallback(turnEnd2);
+}
+static void backwardAbit() {
+	setSideBlockingCallback(NULL);
+	clearMotionQueue();
+	setRobotDistance(0);
+	queueSpeedChange(-0.1, NULL);
+	queueStopAt(-10, turnBack);
 }
 static void turnEnd() {
 	actionState = 2;
 	setBrushMiddle();
 	queueSpeedChange(0.1, NULL);
-	setSideBlockingCallback(turnBack);
+	setSideBlockingCallback(backwardAbit);
 }
 // start collecting cubes : first destroy cube stack
 static void eatCorner(struct motionElement * a) {
