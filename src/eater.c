@@ -15,7 +15,7 @@
 #define BRUSHSPEED 500
 #define BRUSHON 812
 #define BRUSHOFF 280
-#define BRUSHMIDDLE 680
+#define BRUSHMIDDLE 700
 
 #define AXDOOR 141
 #define DOORSPEED 400
