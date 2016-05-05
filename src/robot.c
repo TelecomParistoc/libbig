@@ -13,12 +13,12 @@ static void (*gameStartCallback)(void) = NULL;
 static void (*gameStopCallback)(void) = NULL;
 static void (*collisionDetectCallback)(int) = NULL;
 static void (*collisionEndCallback)(int) = NULL;
-static int collisions[4] = {0, 0, 0, 0};
+static int collisions[5] = {0, 0, 0, 0, 0};
 static int lastJack = 0;
 static collisionConfig_t collConfig = all;
 
 static void collisionsCallback() {
-    for(int i=0; i<4; i++) {
+    for(int i=0; i<5; i++) {
         if(getCollisionDetector(i+1) && (!collisions[i])) {
             if(collisionDetectCallback != NULL && i > 1)
                 collisionDetectCallback(i);
@@ -95,11 +95,11 @@ int isRobotFront() {
     switch (collConfig) {
         case all:
         case front:
-            return collisions[FRONT_RIGHT_COLLISION] || collisions[FRONT_LEFT_COLLISION];
+            return collisions[FRONT_RIGHT_COLLISION] || collisions[FRONT_LEFT_COLLISION] || collisions[FRONT_COLLISION];
         case left:
-            return collisions[FRONT_LEFT_COLLISION];
+            return collisions[FRONT_LEFT_COLLISION] || collisions[FRONT_COLLISION];
         case right:
-            return collisions[FRONT_RIGHT_COLLISION];
+            return collisions[FRONT_RIGHT_COLLISION] || collisions[FRONT_COLLISION];
         case rear:
         case none:
             return 0;

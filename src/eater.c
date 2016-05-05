@@ -155,7 +155,7 @@ static void speedManager() {
 	differenceL = differenceL > 0 ? differenceL : 0;
 	if((differenceL <= 0.4 || differenceR <= 0.4) && getTargetSpeed() == 0.01) {
 		fastSpeedChange(-0.01);
-		scheduleIn(300, goForwardToCubes);
+		scheduleIn(200, goForwardToCubes);
 	} else {
 		fastSpeedChange(0.01);
 		scheduleIn(200, speedManager);
