@@ -187,7 +187,7 @@ static void turnEnd3() {
 static void backFromCubes(struct motionElement * a) {
 	actionState = 5;
 	if(a) {}
-	setTargetHeading(200, turnEnd3);n
+	setTargetHeading(200, turnEnd3);
 }
 static void turnEnd2() {
 	if(actionState >= 4)
