@@ -63,7 +63,7 @@ void initRobot() {
 	enableCollisionCallback(2);
 	enableCollisionCallback(3);
 	enableCollisionCallback(4);
-	disableCollisionCallback(5);
+	enableCollisionCallback(5);
 	setCollisionsCallback(collisionsCallback);
 	initUmbrella();
 	initBrush();
