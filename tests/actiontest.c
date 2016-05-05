@@ -95,7 +95,7 @@ int main() {
     enableHeadingControl(1);
     setActiveDetectors(all);
 
-    scheduleIn(2000, enableRearSensors);
+    //scheduleIn(2000, enableRearSensors);
     ffollow("start2cubes", arrivedNearCubes);
     startUmbrellaAction();
     while(!isEaterActionFinished()) {
