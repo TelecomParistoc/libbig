@@ -18,13 +18,13 @@ static void actionFinished() {
     if(actionState >= 4)
         return;
     fastSpeedChange(0);
-    setSideBlockingCallback(NULL);
-    setCurrentLocation(450, 1859);
+    setBlockingCallback(NULL);
+    setCurrentLocation(446, 1859);
     actionState = 4;
 }
 static void closeDoor() {
     queueSpeedChange(-0.1, NULL);
-    setSideBlockingCallback(actionFinished);
+    setBlockingCallback(actionFinished);
     scheduleIn(1500, actionFinished);
 }
 static void turnToDoor(struct motionElement * a) {
@@ -43,7 +43,7 @@ static void recalibrationEnd() {
     setRobotHeading(180);
     setTargetHeading(180, NULL);
     queueSpeedChange(-0.3, NULL);
-    queueStopAt(-260, turnToDoor);
+    queueStopAt(-280, turnToDoor);
 }
 void resumeDoorsAction() {
     switch (actionState) {
@@ -66,11 +66,13 @@ void pauseDoorsAction() {
 
 void startDoorsAction() {
     actionState = 1;
+    setActiveDetectors(all);
+    /*
     if(getTeam() == GREEN_TEAM)
         setActiveDetectors(right);
     else
         setActiveDetectors(left);
-
+    */
     enableHeadingControl(0);
     queueSpeedChange(0.2, NULL);
     setBlockingCallback(recalibrationEnd);

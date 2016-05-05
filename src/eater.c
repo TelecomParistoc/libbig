@@ -187,8 +187,7 @@ static void turnEnd3() {
 static void backFromCubes(struct motionElement * a) {
 	actionState = 5;
 	if(a) {}
-	setTargetHeading(200, turnEnd3);
-
+	setTargetHeading(200, turnEnd3);n
 }
 static void turnEnd2() {
 	if(actionState >= 4)
@@ -199,12 +198,10 @@ static void turnEnd2() {
 	queueSpeedChange(-0.2, NULL);
 	queueStopAt(-57, backFromCubes);
 	setSideBlockingCallback(NULL);
-	setMaxAcceleration(0.5);
 }
 static void turnBack(struct motionElement * a) {
 	if(a) {}
 	actionState = 3;
-	setMaxAcceleration(0.1);
 	setTargetHeading(120, turnEnd2);
 	setSideBlockingCallback(turnEnd2);
 }
