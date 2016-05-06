@@ -70,14 +70,12 @@ void pauseDoorsAction() {
 
 void startDoorsAction() {
     actionState = 1;
-    setActiveDetectors(all);
-    /*
+    //setActiveDetectors(all);
     if(getTeam() == GREEN_TEAM)
         setActiveDetectors(right);
     else
         setActiveDetectors(left);
-    */
     enableHeadingControl(0);
-    queueSpeedChange(0.2, NULL);
+    queueSpeedChange(0.3, NULL);
     setBlockingCallback(recalibrationEnd);
 }

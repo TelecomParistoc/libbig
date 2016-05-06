@@ -13,9 +13,9 @@
 // middle : rayon 235.5mm
 #define AXBRUSH 133
 #define BRUSHSPEED 500
-#define BRUSHON 780
+#define BRUSHON 800
 #define BRUSHOFF 280
-#define BRUSHMIDDLE 280
+#define BRUSHMIDDLE 700
 
 #define AXDOOR 141
 #define DOORSPEED 400
