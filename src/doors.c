@@ -14,16 +14,17 @@ static int actionState = 0;
 int isDoorsActionFinished() {
     return actionState == 4;
 }
-static void blockedAgainstDoors() {
-    scheduleIn(500, actionFinished);
-    setBlockingCallback(NULL);
-}
+
 static void actionFinished() {
     if(actionState >= 4)
         return;
     fastSpeedChange(0);
     setCurrentLocation(446, 1859);
     actionState = 4;
+}
+static void blockedAgainstDoors() {
+    scheduleIn(500, actionFinished);
+    setBlockingCallback(NULL);
 }
 static void closeDoor() {
     queueSpeedChange(-0.1, NULL);
