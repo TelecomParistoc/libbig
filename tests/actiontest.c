@@ -128,7 +128,7 @@ int main() {
     // seashells
     setActiveDetectors(none);
     forceStop(0);
-    scheduleIn(1000, enableAllSensors);
+    scheduleIn(5000, enableAllSensors);
     ffollow("doors2zone", stopRobot);
 
     while(1) {
