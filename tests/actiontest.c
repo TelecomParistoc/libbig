@@ -73,6 +73,9 @@ static void enableSideSensors() {
     else
         setActiveDetectors(left);
 }
+static void stopRobot() {
+    forceStop(1);
+}
 
 int main() {
     // init
@@ -126,7 +129,8 @@ int main() {
     setActiveDetectors(none);
     forceStop(0);
     scheduleIn(1000, enableAllSensors);
-    ffollow("doors2zone", NULL);
+    ffollow("doors2zone", stopRobot);
+
     while(1) {
         waitFor(50);
     	checkCollisions();
