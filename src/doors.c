@@ -20,13 +20,16 @@ static void actionFinished() {
         return;
     fastSpeedChange(0);
     setCurrentLocation(446, 1859);
+    setActiveDetectors(none);
     actionState = 4;
 }
 static void blockedAgainstDoors() {
+    setActiveDetectors(none);
     scheduleIn(500, actionFinished);
     setBlockingCallback(NULL);
 }
 static void closeDoor() {
+    setActiveDetectors(none);
     queueSpeedChange(-0.1, NULL);
     setBlockingCallback(blockedAgainstDoors);
     scheduleIn(1500, blockedAgainstDoors);
