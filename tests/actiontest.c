@@ -40,7 +40,7 @@ static void onStop() {
 }
 static void checkCollisions() {
     static int lastStopped = 0;
-    if(getTargetSpeed() >= 0){
+    if(getTargetSpeed() > 0){
         if(isRobotFront()) {
             lastStopped = 1;
             forceStop(1);
@@ -51,7 +51,7 @@ static void checkCollisions() {
             setLED(3, 0);
         }
     }
-    if(getTargetSpeed() <= 0) {
+    if(getTargetSpeed() < 0) {
         if(isRobotBehind()) {
             lastStopped = 1;
             forceStop(1);
