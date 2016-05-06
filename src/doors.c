@@ -12,18 +12,21 @@
 static int actionState = 0;
 
 int isDoorsActionFinished() {
-    return actionState == 4;
+    return actionState == 5;
 }
 
 static void actionFinished() {
-    if(actionState >= 4)
+    if(actionState >= 5)
         return;
     fastSpeedChange(0);
     setCurrentLocation(446, 1859);
     setActiveDetectors(none);
-    actionState = 4;
+    actionState = 5;
 }
 static void blockedAgainstDoors() {
+    if(actionState >= 4)
+        return;
+    actionState = 4;
     setActiveDetectors(none);
     scheduleIn(500, actionFinished);
     setBlockingCallback(NULL);
