@@ -1,0 +1,11 @@
+**/.DS_Store
+build/
+tests/AX12position
+tests/AXcomm
+tests/AXmove
+tests/timing
+._*
+*.swp
+doc/html
+doc/latex
+.pirun.*
