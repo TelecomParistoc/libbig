@@ -10,9 +10,6 @@ void stopGame();
 // call to trigger finish action
 void finishAction();
 
-// in actionhandler.c
-int readAndCall(FILE * file, char c);
-
 void
 
 #endif
