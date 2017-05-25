@@ -5,6 +5,9 @@
 extern "C" {
 #endif
 
+#include <stdio.h>
+#include "actionsgrobot.h"
+
 // call before game starts
 void initRobot();
 
@@ -16,5 +19,9 @@ void finishAction();
 
 // call actions from input text file
 int readAndCall(FILE * file, char c);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif // ROBOT_H

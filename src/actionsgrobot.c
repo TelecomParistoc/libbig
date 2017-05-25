@@ -3,10 +3,10 @@
 #include <robotdriver/driver.h>
 
 void initMoteurs() {
-  wiringPiSetup();
+  //wiringPiSetup();
   pinMode(1, PWM_OUTPUT); // Motor 1
   pinMode(7, OUTPUT); // Motor 2, lanceur de balles ?
-  initAX12(15200);
+  //initAX12(15200);
   AX12setSpeed(143, SPEED);
   AX12setSpeed(144, SPEED);
 }

@@ -5,4 +5,4 @@
 
 int readAndCall(FILE * file, char c);
 
-#endif
+#endif // ACTIONHANDLER_H
