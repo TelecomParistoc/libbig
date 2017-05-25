@@ -1,6 +1,10 @@
 #ifndef ROBOT_H
 #define ROBOT_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 // call before game starts
 void initRobot();
 
@@ -10,6 +14,7 @@ void stopGame();
 // call to trigger finish action
 void finishAction();
 
-void
+// call actions from input text file
+int readAndCall(FILE * file, char c);
 
-#endif
+#endif // ROBOT_H
