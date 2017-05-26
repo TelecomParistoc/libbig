@@ -8,7 +8,7 @@ void initRobot() {
 	initAX12(115200);
 	initRoof();
 
-	
+	resumeRobot();
 }
 
 // call after 90 sec of game
